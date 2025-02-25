@@ -42,6 +42,6 @@ public class LoginController {
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
-        }
+    }
 
 }

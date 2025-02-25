@@ -35,17 +35,32 @@ public class DatabaseRepo {
             preparedStatement.setInt(4, bestilling.getKunde_id());
             preparedStatement.setInt(5, bestilling.getKlippetype_id());
             int rowInserted = preparedStatement.executeUpdate();
-            if (rowInserted > 0)
-            {
+            if (rowInserted > 0) {
                 System.out.println("Bestilling tilføjet");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        if ()
-
     }
+
+    public static void createKunde(Kunde kunde) {
+        String sql = "INSERT INTO kunder (id, kunde_navn, kunde_telefon, kunde_email) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, kunde.getId());
+            preparedStatement.setString(2, kunde.getName());
+            preparedStatement.setInt(3, kunde.getTelefon());
+            preparedStatement.setString(4, kunde.getEmail());
+            int rowInserted = preparedStatement.executeUpdate();
+            if (rowInserted > 0) {
+                System.out.println("Kunde oprettet");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
