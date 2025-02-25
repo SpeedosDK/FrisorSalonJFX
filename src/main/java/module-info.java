@@ -10,6 +10,7 @@ module sample.frisorsalonjfx {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens sample.frisorsalonjfx to javafx.fxml;
     exports sample.frisorsalonjfx;
