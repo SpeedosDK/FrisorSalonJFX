@@ -24,6 +24,29 @@ public class DatabaseRepo {
         return medarbejdere;
     }
 
+    public static void createBestilling(Bestilling bestilling) {
+        String sql = "INSERT INTO bestillinger (id, medarbejder_id, bestilling_tid, kunde_id, klippetype_id) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, bestilling.getId());
+            preparedStatement.setInt(2, bestilling.getMedarbejder_id());
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(bestilling.getBestilling_tid()));
+            preparedStatement.setInt(4, bestilling.getKunde_id());
+            preparedStatement.setInt(5, bestilling.getKlippetype_id());
+            int rowInserted = preparedStatement.executeUpdate();
+            if (rowInserted > 0)
+            {
+                System.out.println("Bestilling tilføjet");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if ()
+
+    }
+
 
 }
 

@@ -25,9 +25,7 @@ public class LoginController {
     public void onLoginButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-
         boolean loggedIn = Logic.login(username, password);
-
         if (loggedIn) {
             try {
                 changeToMenu();
