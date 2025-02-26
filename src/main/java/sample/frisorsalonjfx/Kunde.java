@@ -1,6 +1,6 @@
 package sample.frisorsalonjfx;
 
-public class Kunde {
+public class Kunde implements Person {
     private int id;
     private String name;
     private int telefon;
@@ -13,18 +13,19 @@ public class Kunde {
         this.email = email;
     }
 
+    @Override
     public int getId() {
         return id;
     }
-
+    @Override
     public void setId(int id) {
         this.id = id;
     }
-
+    @Override
     public String getName() {
         return name;
     }
-
+    @Override
     public void setName(String name) {
         this.name = name;
     }

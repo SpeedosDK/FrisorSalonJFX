@@ -21,23 +21,28 @@ public class LoginController {
     @FXML
     private Label wrongLoginLabel;
 
+    Logic logic = new Logic();
+
     @FXML
     public void onLoginButtonClick() {
         String username = usernameField.getText();
         String password = passwordField.getText();
-        boolean loggedIn = Logic.login(username, password);
+        boolean loggedIn = logic.login(username, password);
         if (loggedIn) {
             try {
                 changeToMenu();
             } catch (LoginException | IOException e) {
-                wrongLoginLabel.setText(e.getMessage());
+                System.out.println(e.getMessage());
             }
+        } else {
+            wrongLoginLabel.setText("Wrong username or password");
         }
+
     }
     
     @FXML
     public void changeToMenu() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main-menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(new Scene(root));

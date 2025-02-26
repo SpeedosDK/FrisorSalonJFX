@@ -1,20 +1,23 @@
 package sample.frisorsalonjfx;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Bestilling {
     private int id;
-    private int medarbejder_id;
-    private LocalDateTime bestilling_tid;
-    private int kunde_id;
-    private int klippetype_id;
+    private Medarbejder medarbejder;
+    private LocalDateTime bestilling_dato;
+    private LocalTime bestilling_time;
+    private Kunde kunde;
+    private Klippetype klippetype;
 
 
-    public Bestilling(int id, int medarbejder_id, LocalDateTime bestilling_tid, int kunde_id, int klippetype_id) {
+    public Bestilling(int id, Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype) {
         this.id = id;
-        this.medarbejder_id = medarbejder_id;
-        this.bestilling_tid = bestilling_tid;
-        this.kunde_id = kunde_id;
-        this.klippetype_id = klippetype_id;
+        this.medarbejder = medarbejder;
+        this.bestilling_dato = bestilling_dato;
+        this.bestilling_time = bestilling_time;
+        this.kunde = kunde;
+        this.klippetype = klippetype;
     }
 
 
@@ -27,36 +30,44 @@ public class Bestilling {
     this.id = id;
     }
 
-    public int getMedarbejder_id() {
-        return medarbejder_id;
+    public Medarbejder getMedarbejder() {
+        return medarbejder;
     }
 
-    public void setMedarbejder_id(int medarbejder_id) {
-        this.medarbejder_id = medarbejder_id;
+    public void setMedarbejder(Medarbejder medarbejder) {
+        this.medarbejder = medarbejder;
     }
 
-    public LocalDateTime getBestilling_tid() {
-        return bestilling_tid;
+    public LocalDateTime getBestilling_dato() {
+        return bestilling_dato;
     }
 
-    public void setBestilling_tid(LocalDateTime bestilling_tid) {
-        this.bestilling_tid = bestilling_tid;
+    public void setBestilling_dato(LocalDateTime bestilling_dato) {
+        this.bestilling_dato = bestilling_dato;
     }
 
-    public int getKunde_id() {
-        return kunde_id;
+    public void setBestilling_time(LocalTime bestilling_time) {
+        this.bestilling_time = bestilling_time;
     }
 
-    public void setKunde_id(int kunde_id) {
-        this.kunde_id = kunde_id;
+    public LocalTime getBestilling_time() {
+        return bestilling_time;
     }
 
-    public int getKlippetype_id() {
-        return klippetype_id;
+    public Kunde getKunde() {
+        return kunde;
     }
 
-    public void setKlippetype_id(int klippetype_id) {
-        this.klippetype_id = klippetype_id;
+    public void setKunde(Kunde kunde) {
+        this.kunde = kunde;
+    }
+
+    public Klippetype getKlippetype() {
+        return klippetype;
+    }
+
+    public void setKlippetype(Klippetype klippetype) {
+        this.klippetype = klippetype;
     }
 
 

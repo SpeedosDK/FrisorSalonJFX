@@ -3,9 +3,9 @@ import java.util.List;
 
 public class Logic {
 
-    public static boolean login(String username, String password) throws LoginException {
-        List<Medarbejder> medarbejdere = DatabaseRepo.readMedarbejdere();
-
+    DatabaseRepo db = new DatabaseRepo();
+    public boolean login(String username, String password) throws LoginException {
+        List<Medarbejder> medarbejdere = db.readMedarbejdere();
         try {
             for (Medarbejder medarbejder : medarbejdere) {
                 if (username.equals(medarbejder.getName())) {
