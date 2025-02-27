@@ -8,6 +8,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MedarbejderController {
 
+
     @FXML
     private TextField txfName;
     @FXML
@@ -16,6 +17,8 @@ public class MedarbejderController {
     private Button btnAdd;
     @FXML
     private Button btnDelete;
+    @FXML
+    private CheckBox cbAdmin;
 
     @FXML
     private TableView<Medarbejder> tblMedarbejder;
@@ -37,10 +40,16 @@ public class MedarbejderController {
     public void addMedarbejder() {
         String name = txfName.getText();
         String password = txfPassword.getText();
-        medarbejderLogic.addMedarbejder(name, password);
-        medarbejderList.clear();
-        medarbejderList.addAll(medarbejderLogic.getAllMedarbejder());
-        tblMedarbejder.setItems(medarbejderList);
+        Boolean admin = cbAdmin.isSelected();
+        try {
+            medarbejderLogic.addMedarbejder(name, password, admin);
+            medarbejderList.clear();
+            medarbejderList.addAll(medarbejderLogic.getAllMedarbejder());
+            tblMedarbejder.setItems(medarbejderList);
+        } catch (SecurityException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 

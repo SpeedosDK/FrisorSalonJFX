@@ -11,11 +11,12 @@ import java.time.*;
 public class DatabaseRepo {
 
     public void createMedarbejder(Medarbejder medarbejder) {
-        String sql = "INSERT INTO medarbejder (name, password) VALUES (?,?)";
+        String sql = "INSERT INTO medarbejder (name, password, admin) VALUES (?,?,?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, medarbejder.getName());
             preparedStatement.setString(2, medarbejder.getPassword());
+            preparedStatement.setBoolean(3, medarbejder.isAdmin());
 
             int rowInserted = preparedStatement.executeUpdate();
             if (rowInserted > 0) {
@@ -40,7 +41,8 @@ public class DatabaseRepo {
                 int id = resultSet.getInt("medarbejder_id");
                 String name = resultSet.getString("name");
                 String password = resultSet.getString("password");
-                medarbejdere.add(new Medarbejder(id, name, password));
+                Boolean isAdmin = resultSet.getBoolean("admin");
+                medarbejdere.add(new Medarbejder(id, name, password, isAdmin));
             }
         } catch(SQLException e) {
         e.printStackTrace();
@@ -146,7 +148,8 @@ public class DatabaseRepo {
                 Medarbejder medarbejder = new Medarbejder(
                         resultSet.getInt("medarbejder_id"),
                         resultSet.getString("name"),
-                        null // Password er ikke nødvendigt her
+                        null, // Password er ikke nødvendigt her
+                        resultSet.getBoolean("admin")
                 );
 
                 // Opret Bestilling-objekt og tilføj til listen
