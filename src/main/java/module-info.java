@@ -11,6 +11,7 @@ module sample.frisorsalonjfx {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.sql;
+    requires java.desktop;
 
     opens sample.frisorsalonjfx to javafx.fxml;
     exports sample.frisorsalonjfx;

@@ -1,6 +1,6 @@
 package sample.frisorsalonjfx;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 public class Bestilling {
     private int id;

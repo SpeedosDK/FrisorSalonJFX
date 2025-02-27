@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.w3c.dom.Text;
 import javafx.scene.control.*;
 
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class LoginController {
     @FXML
     private Label wrongLoginLabel;
 
-    Logic logic = new Logic();
+    LoginLogic logic = new LoginLogic();
 
     @FXML
     public void onLoginButtonClick() {

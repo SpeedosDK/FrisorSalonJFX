@@ -1,9 +1,10 @@
 package sample.frisorsalonjfx;
 import java.util.List;
 
-public class Logic {
+public class LoginLogic {
 
     DatabaseRepo db = new DatabaseRepo();
+
     public boolean login(String username, String password) throws LoginException {
         List<Medarbejder> medarbejdere = db.readMedarbejdere();
         try {

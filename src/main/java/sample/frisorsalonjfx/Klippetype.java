@@ -37,4 +37,8 @@ public class Klippetype {
     public void setTimeForCut(int timeForCut) {
         this.timeForCut = timeForCut;
     }
+
+    public String getName() {
+        return klippeStil;
+    }
 }
