@@ -1,4 +1,4 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.Database;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class DatabaseConnection {
+
+
     public static Connection getConnection()
     {
         Properties prop = new Properties();

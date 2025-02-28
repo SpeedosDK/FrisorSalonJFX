@@ -23,8 +23,9 @@
       </Label>
       <TextField fx:id="txfName" layoutX="106.0" layoutY="130.0" promptText="Navn" style="-fx-background-color: mintcream;" />
       <TextField fx:id="txfPassword" layoutX="107.0" layoutY="175.0" promptText="Password" style="-fx-background-color: mintcream;" />
-      <Button layoutX="155.0" layoutY="285.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: mintcream;" text="Slet" />
+      <Button fx:id="btnDelete" layoutX="155.0" layoutY="285.0" mnemonicParsing="false" onAction="#deleteMedarbejder" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: mintcream;" text="Slet" />
       <Button fx:id="btnAdd" layoutX="155.0" layoutY="251.0" mnemonicParsing="false" onAction="#addMedarbejder" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: mintcream;" text="Tilføj" />
       <CheckBox fx:id="cbAdmin" layoutX="154.0" layoutY="219.0" mnemonicParsing="false" text="Admin" />
+      <Button fx:id="btnGoBack" layoutX="42.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToMenu" text="Gå tilbage" />
    </children>
 </Pane>

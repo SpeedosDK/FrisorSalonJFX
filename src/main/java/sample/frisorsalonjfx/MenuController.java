@@ -12,6 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.Database.BestillingRepo;
+import sample.frisorsalonjfx.Database.KlippetypeRepo;
+import sample.frisorsalonjfx.Database.KundeRepo;
+import sample.frisorsalonjfx.Database.MedarbejderRepo;
+
 import java.util.List;
 import java.io.IOException;
 import java.time.*;
@@ -31,6 +36,9 @@ public class MenuController {
     public void changeToBestillinger() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør bestillinger.fxml"));
         Parent root = fxmlLoader.load();
+
+        BestillingerController bestillingerController = fxmlLoader.getController();
+        bestillingerController.setiBestillinger(new BestillingLogic(new BestillingRepo()));
         Stage stage = (Stage) btnBestillinger.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -41,6 +49,9 @@ public class MenuController {
     public void changeToKunder() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OpretKunde.fxml"));
         Parent root = fxmlLoader.load();
+
+        KundeController kundeController = fxmlLoader.getController();
+        kundeController.setIKunder(new KundeLogic(new KundeRepo()));
         Stage stage = (Stage) btnKunder.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -51,6 +62,9 @@ public class MenuController {
     public void changeToKlippetype() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør klippetype.fxml"));
         Parent root = fxmlLoader.load();
+
+        KlippetypeController klippetypeController = fxmlLoader.getController();
+        klippetypeController.setKlippeType(new KlippeTypeLogic(new KlippetypeRepo()));
         Stage stage = (Stage) btnKlippetype.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -61,6 +75,9 @@ public class MenuController {
     public void changeToMedarbejder() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør opret medarbejder.fxml"));
         Parent root = fxmlLoader.load();
+
+        MedarbejderController medarbejderController = fxmlLoader.getController();
+        medarbejderController.setiMedarbejder(new MedarbejderLogic(new MedarbejderRepo()));
         Stage stage = (Stage) btnMedarbejder.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

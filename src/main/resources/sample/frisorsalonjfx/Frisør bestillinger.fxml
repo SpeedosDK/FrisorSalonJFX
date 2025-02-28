@@ -7,28 +7,32 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="649.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.BestillingerController">
    <children>
       <Label alignment="TOP_CENTER" layoutX="180.0" layoutY="22.0" prefHeight="76.0" prefWidth="240.0" text="Bestillinger" textFill="WHITE">
          <font>
             <Font name="Californian FB Italic" size="36.0" />
          </font>
       </Label>
-      <TableView layoutX="208.0" layoutY="85.0" prefHeight="292.0" prefWidth="362.0" style="-fx-background-color: mintcream;">
+      <TableView fx:id="bestillingTableView" layoutX="132.0" layoutY="84.0" prefHeight="292.0" prefWidth="515.0" style="-fx-background-color: mintcream;">
         <columns>
-          <TableColumn prefWidth="116.66661071777344" style="-fx-background-color: mintcream;" text="Navn" />
-          <TableColumn minWidth="0.0" prefWidth="120.6666259765625" style="-fx-background-color: mintcream;" text="Klippetype" />
-            <TableColumn prefWidth="62.000091552734375" style="-fx-background-color: mintcream;" text="Tid" />
-            <TableColumn prefWidth="64.0" style="-fx-background-color: mintcream;" text="Pris" />
+          <TableColumn fx:id="colId" prefWidth="45.99993896484375" style="-fx-background-color: mintcream;" text="ID" />
+          <TableColumn fx:id="colKunde" minWidth="0.0" prefWidth="65.99998474121094" style="-fx-background-color: mintcream;" text="Navn" />
+            <TableColumn fx:id="colKlippetype" prefWidth="83.99993896484375" style="-fx-background-color: mintcream;" text="Klippetype" />
+            <TableColumn fx:id="colDato" prefWidth="76.0" style="-fx-background-color: mintcream;" text="Dato" />
+            <TableColumn fx:id="colTid" prefWidth="93.99996948242188" style="-fx-background-color: mintcream;" text="Tid" />
+            <TableColumn fx:id="colPris" prefWidth="64.0" style="-fx-background-color: mintcream;" text="Pris" />
+            <TableColumn fx:id="colMedarbejder" prefWidth="83.66668701171875" style="-fx-background-color: mintcream;" text="Medarbejder" />
         </columns>
       </TableView>
-      <Button layoutX="45.0" layoutY="250.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Slet bestilling" />
-      <Button layoutX="45.0" layoutY="208.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Rediger bestilling" />
-      <Label alignment="TOP_CENTER" layoutX="35.0" layoutY="118.0" prefHeight="37.0" prefWidth="135.0" text="Vælg bestilling" textFill="WHITE">
+      <Button fx:id="btnSletBestilling" layoutX="10.0" layoutY="246.0" mnemonicParsing="false" onAction="#sletBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Slet bestilling" />
+      <Button fx:id="btnRedigerBestilling" layoutX="10.0" layoutY="207.0" mnemonicParsing="false" onAction="#changeToRedigerBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Rediger bestilling" />
+      <Label alignment="TOP_CENTER" layoutX="1.0" layoutY="118.0" prefHeight="37.0" prefWidth="135.0" text="Vælg bestilling" textFill="WHITE">
          <font>
             <Font name="Californian FB Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="44.0" layoutY="169.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Opret bestilling" />
+      <Button fx:id="btnOpretBestilling" layoutX="10.0" layoutY="169.0" mnemonicParsing="false" onAction="#changeToOpretBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Opret bestilling" />
+      <Button fx:id="backtoMenuButton" layoutX="33.0" layoutY="22.0" mnemonicParsing="false" onAction="#backToMenu" text="Gå tilbage" />
    </children>
 </Pane>

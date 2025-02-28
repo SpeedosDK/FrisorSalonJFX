@@ -1,9 +1,12 @@
 package sample.frisorsalonjfx;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.Database.BestillingRepo;
+import sample.frisorsalonjfx.Database.IBestillingRepository;
+
 import java.util.List;
 import java.io.IOException;
 import java.time.*;
@@ -43,7 +49,13 @@ public class BestillingerController {
 
     private ObservableList<Bestilling> bestillingList = FXCollections.observableArrayList();
 
+    private  IBestillinger iBestillinger;
 
+    public BestillingerController() {}
+    public void setiBestillinger(IBestillinger iBestillinger) {
+        this.iBestillinger = iBestillinger;
+        initData();
+    }
     @FXML
     public void initialize() {
         // Kobl kolonner til Bestilling-objektets felter
@@ -58,20 +70,24 @@ public class BestillingerController {
                 new SimpleStringProperty(cellData.getValue().getKlippetype().getName()));
         colMedarbejder.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getMedarbejder().getName()));
+        colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getPrice())));
 
-        loadBestillinger();
+
     }
-
-    private void loadBestillinger() {
-        List<Bestilling> bestillinger = db.readBestillinger();
-        bestillingList.setAll(bestillinger);
-        bestillingTableView.setItems(bestillingList);
+    public void initData() {
+        if (iBestillinger != null) {
+            bestillingList.addAll(iBestillinger.getBestillinger());
+            bestillingTableView.setItems(bestillingList);
+        }
     }
 
     @FXML
     public void changeToOpretBestilling() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør opret bestilling.fxml"));
         Parent root = fxmlLoader.load();
+
+        BestillingController bestillingController = fxmlLoader.getController();
+        bestillingController.setIBestillinger(iBestillinger);
         Stage stage = (Stage) btnOpretBestilling.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -90,8 +106,8 @@ public class BestillingerController {
     public void sletBestilling() {
         Bestilling slettetBestilling = bestillingTableView.getSelectionModel().getSelectedItem();
         if (slettetBestilling != null) {
-            bestillingTableView.getItems().remove(slettetBestilling); // fjerner objektet fra TableView
-            db.deleteBestilling(slettetBestilling); // fjerner objektet fra databasen
+            iBestillinger.deleteBestilling(slettetBestilling);
+            bestillingTableView.getItems().remove(slettetBestilling);
         }
     }
 

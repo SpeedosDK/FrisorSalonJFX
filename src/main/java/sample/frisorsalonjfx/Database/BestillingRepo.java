@@ -1,75 +1,18 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.Database;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import sample.frisorsalonjfx.*;
 
 import java.sql.*;
-import java.util.*;
-import java.time.*;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
+public class BestillingRepo  implements IBestillingRepository{
 
-
-public class DatabaseRepo {
-
-    public void createMedarbejder(Medarbejder medarbejder) {
-        String sql = "INSERT INTO medarbejder (name, password, admin) VALUES (?,?,?)";
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setString(1, medarbejder.getName());
-            preparedStatement.setString(2, medarbejder.getPassword());
-            preparedStatement.setBoolean(3, medarbejder.isAdmin());
-
-            int rowInserted = preparedStatement.executeUpdate();
-            if (rowInserted > 0) {
-                System.out.println("Medarbejder tilføjet");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
-    public ObservableList<Medarbejder> readMedarbejdere() {
-        ObservableList<Medarbejder> medarbejdere = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM medarbejder";
-
-        try (Connection connection = DatabaseConnection.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("medarbejder_id");
-                String name = resultSet.getString("name");
-                String password = resultSet.getString("password");
-                Boolean isAdmin = resultSet.getBoolean("admin");
-                medarbejdere.add(new Medarbejder(id, name, password, isAdmin));
-            }
-        } catch(SQLException e) {
-        e.printStackTrace();
-        }
-        return medarbejdere;
-    }
-    public ObservableList<Kunde> readKunder() {
-        ObservableList<Kunde> kunder = FXCollections.observableArrayList();
-        String sql = "SELECT * FROM kunder";
-        try (Connection connection = DatabaseConnection.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery(sql)) {
-            while (resultSet.next()) {
-                int id = resultSet.getInt("kunde_id");
-                String name = resultSet.getString("name");
-                int tlfnr = resultSet.getInt("tlfnr");
-                String email = resultSet.getString("email");
-                kunder.add(new Kunde(id, name, tlfnr, email));
-            }
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-        return kunder;
-
-
-    }
-
+    @Override
     public void createBestilling(Bestilling bestilling) {
         String sql = "INSERT INTO bestillinger (bestilling_id, bestilling_dato, bestilling_tid, kunde_id, klippeType_id, medarbejder_id) VALUES (?, ?, ?, ?, ?, ?)";
 
@@ -90,34 +33,16 @@ public class DatabaseRepo {
             e.printStackTrace();
         }
     }
-
-    public void createKunde(Kunde kunde) {
-        String sql = "INSERT INTO kunder (kunde_id, name, tlfnr, email) VALUES (?, ?, ?, ?)";
-
-        try (Connection connection = DatabaseConnection.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, kunde.getId());
-            preparedStatement.setString(2, kunde.getName());
-            preparedStatement.setInt(3, kunde.getTelefon());
-            preparedStatement.setString(4, kunde.getEmail());
-            int rowInserted = preparedStatement.executeUpdate();
-            if (rowInserted > 0) {
-                System.out.println("Kunde oprettet");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<Bestilling> readBestillinger() {
-        List<Bestilling> bestillinger = new ArrayList<>();
+    @Override
+    public ObservableList<Bestilling> readBestillinger() {
+        ObservableList<Bestilling> bestillinger = FXCollections.observableArrayList();
         String sql = "SELECT b.bestilling_id, b.bestilling_dato, b.bestilling_tid, " +
                 "k.kunde_id, k.name, k.tlfnr, k.email, " +
                 "kl.klippeType_id, kl.klipning, kl.klippe_length, kl.pris, " +
                 "m.medarbejder_id, m.name AS medarbejder_navn " +
                 "FROM bestillinger b " +
                 "JOIN kunder k ON b.kunde_id = k.kunde_id " +
-                "JOIN klippetyper kl ON b.klippeType_id = kl.klippeType_id " +
+                "JOIN klippetype kl ON b.klippeType_id = kl.klippeType_id " +
                 "JOIN medarbejder m ON b.medarbejder_id = m.medarbejder_id";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -148,7 +73,7 @@ public class DatabaseRepo {
                 Medarbejder medarbejder = new Medarbejder(
                         resultSet.getInt("medarbejder_id"),
                         resultSet.getString("name"),
-                        null, // Password er ikke nødvendigt her
+                        null, // password ligemeget
                         resultSet.getBoolean("admin")
                 );
 
@@ -161,9 +86,9 @@ public class DatabaseRepo {
 
         return bestillinger;
     }
-
+    @Override
     public void deleteBestilling(Bestilling bestilling) {
-        String sql = "DELETE FROM bestilling WHERE id = ?";
+        String sql = "DELETE FROM bestilling WHERE bestilling_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -177,8 +102,3 @@ public class DatabaseRepo {
         }
     }
 }
-
-
-
-
-

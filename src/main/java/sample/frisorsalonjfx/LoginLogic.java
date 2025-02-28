@@ -1,12 +1,15 @@
 package sample.frisorsalonjfx;
+import sample.frisorsalonjfx.Database.IMedarbejderRepository;
+import sample.frisorsalonjfx.Database.MedarbejderRepo;
+
 import java.util.List;
 
-public class LoginLogic {
+public class LoginLogic implements IAuthService {
 
     DatabaseRepo db = new DatabaseRepo();
 
     public boolean login(String username, String password) throws LoginException {
-        List<Medarbejder> medarbejdere = db.readMedarbejdere();
+        List<Medarbejder> medarbejdere = medarbejderRepo.readMedarbejdere();
         try {
             for (Medarbejder medarbejder : medarbejdere) {
                 if (username.equals(medarbejder.getName())) {

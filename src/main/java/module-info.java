@@ -15,4 +15,6 @@ module sample.frisorsalonjfx {
 
     opens sample.frisorsalonjfx to javafx.fxml;
     exports sample.frisorsalonjfx;
+    exports sample.frisorsalonjfx.Database;
+    opens sample.frisorsalonjfx.Database to javafx.fxml;
 }

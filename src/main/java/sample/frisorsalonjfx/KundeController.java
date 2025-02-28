@@ -8,6 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import sample.frisorsalonjfx.Database.IKundeRepository;
+import sample.frisorsalonjfx.Database.KundeRepo;
 
 public class KundeController {
 
@@ -32,14 +34,28 @@ public class KundeController {
     @FXML
     private Button btnOpretKunde;
 
-    KundeLogic kundeLogic = new KundeLogic();
 
+    private IKunder iKunder;
+
+    public KundeController() {}
+
+    public void setIKunder(IKunder iKunder) {
+        this.iKunder = iKunder;
+        initData();
+    }
     @FXML
     public void initialize() {
         colKundeName.setCellValueFactory(new PropertyValueFactory<Kunde, String>("name"));
         colKundeTelefon.setCellValueFactory(new PropertyValueFactory<Kunde, Integer>("Telefon"));
         colKundeEmail.setCellValueFactory(new PropertyValueFactory<Kunde, String>("Email"));
-        tblKunde.setItems(kundeLogic.getKunder());
+
+    }
+
+    public void initData() {
+        if (iKunder != null) {
+            kundeListe.addAll(iKunder.getKunder());
+            tblKunde.setItems(iKunder.getKunder());
+        }
     }
 
 
@@ -48,10 +64,10 @@ public class KundeController {
         String name = kundeName.getText();
         int telefon = Integer.parseInt(kundeTelefon.getText());
         String email = txfKundeEmail.getText();
-        kundeLogic.createKunde(name, telefon, email);
+        iKunder.createKunde(name, telefon, email);
 
         kundeListe.clear();
-        kundeListe.addAll(kundeLogic.getKunder());
+        kundeListe.addAll(iKunder.getKunder());
         tblKunde.setItems(kundeListe);
     }
 }
