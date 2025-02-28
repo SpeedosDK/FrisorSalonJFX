@@ -2,16 +2,16 @@ package sample.frisorsalonjfx;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.fxml.*;
-import java.awt.Button;
+import javafx.scene.control.Label;
+import sample.frisorsalonjfx.Database.BestillingRepo;
+
+import javafx.scene.control.*;
 import java.time.*;
-
-
-import java.awt.*;
+import java.util.List;
 
 public class BestillingController {
 
-    BestillingLogic logic = new BestillingLogic();
+    private IBestillinger bestilling;
 
     @FXML
     private ChoiceBox<Medarbejder> cbMedarbejder;
@@ -31,27 +31,24 @@ public class BestillingController {
     @FXML
     private Button btnOpretBestilling;
 
-    public void opretBestilling() {
+    @FXML
+    private Label medarbejderHarTravlt;
+
+    public BestillingController() {}
+    public void setIBestillinger(IBestillinger bestilling) {
+        this.bestilling = bestilling;
+    }
+    public void nyBestilling() {
+        List<Bestilling> bestillinger = bestilling.getBestillinger();
         Medarbejder medarbejder = cbMedarbejder.getSelectionModel().getSelectedItem();
         LocalDateTime bestilling_dato = cbDate.getValue().atStartOfDay();
         LocalTime bestilling_time = cbTid.getValue();
         Kunde kunde = kundeChoiceBox.getSelectionModel().getSelectedItem();
         Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
 
-        logic.nyBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype);
+        if (bestilling.opretBestilling(medarbejder, bestilling_dato, bestilling_time, kunde, klippetype)) {
+            medarbejderHarTravlt.setVisible(true);
+        }
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

@@ -6,8 +6,13 @@ import java.util.List;
 
 public class LoginLogic implements IAuthService {
 
-    DatabaseRepo db = new DatabaseRepo();
+    IMedarbejderRepository medarbejderRepo;
 
+    public LoginLogic(IMedarbejderRepository medarbejderRepo) {
+        this.medarbejderRepo = medarbejderRepo;
+    }
+
+    @Override
     public boolean login(String username, String password) throws LoginException {
         List<Medarbejder> medarbejdere = medarbejderRepo.readMedarbejdere();
         try {

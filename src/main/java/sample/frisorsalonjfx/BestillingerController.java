@@ -24,8 +24,6 @@ import java.time.*;
 
 public class BestillingerController {
 
-    DatabaseRepo db = new DatabaseRepo();
-
     @FXML
     private Button btnOpretBestilling;
     @FXML
@@ -46,6 +44,10 @@ public class BestillingerController {
     private TableColumn<Bestilling, String> colKlippetype;
     @FXML
     private TableColumn<Bestilling, String> colMedarbejder;
+    @FXML
+    private TableColumn<Bestilling, String> colPris;
+    @FXML
+    private Button backtoMenuButton;
 
     private ObservableList<Bestilling> bestillingList = FXCollections.observableArrayList();
 
@@ -111,6 +113,12 @@ public class BestillingerController {
         }
     }
 
-
-
+    @FXML
+    public void backToMenu() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør hoved menu.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) backtoMenuButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

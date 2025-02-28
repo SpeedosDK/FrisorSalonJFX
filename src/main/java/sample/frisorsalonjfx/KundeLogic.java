@@ -8,8 +8,13 @@ import java.util.InputMismatchException;
 
 public class KundeLogic  implements IKunder{
 
-    public DatabaseRepo db = new DatabaseRepo();
+    private final IKundeRepository kundeRepo;
 
+    public KundeLogic(IKundeRepository kundeRepo) {
+        this.kundeRepo = kundeRepo;
+    }
+
+    @Override
     public Kunde createKunde(String name, int tlf, String email) throws InputMismatchException {
         try {
             if (name == null || name.isEmpty()) {
@@ -21,7 +26,6 @@ public class KundeLogic  implements IKunder{
         } catch (InputMismatchException e) {
             throw new InputMismatchException("Invalid input");
         }
-
     }
     @Override
     public ObservableList<Kunde> getKunder() {

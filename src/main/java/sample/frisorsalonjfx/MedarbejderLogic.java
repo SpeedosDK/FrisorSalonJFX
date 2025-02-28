@@ -6,7 +6,7 @@ import sample.frisorsalonjfx.Database.MedarbejderRepo;
 
 public class MedarbejderLogic implements IMedarbejder{
 
-    DatabaseRepo db = new DatabaseRepo();
+    private final IMedarbejderRepository medarbejderRepo;
     Medarbejder currentUser;
 
 

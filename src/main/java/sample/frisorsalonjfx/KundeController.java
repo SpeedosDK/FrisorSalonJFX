@@ -70,4 +70,14 @@ public class KundeController {
         kundeListe.addAll(iKunder.getKunder());
         tblKunde.setItems(kundeListe);
     }
+
+    @FXML
+    public void sletKunde() {
+        Kunde slettetKunde = tblKunde.getSelectionModel().getSelectedItem();
+        if (slettetKunde != null) {
+            iKunder.deleteKunde(slettetKunde);
+            tblKunde.getItems().remove(slettetKunde);
+        }
+    }
+
 }
