@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label alignment="CENTER" layoutX="160.0" layoutY="23.0" prefHeight="48.0" prefWidth="281.0" text="Opret bestilling">
+         <font>
+            <Font name="Californian FB Italic" size="43.0" />
+         </font>
+      </Label>
+      <DatePicker layoutX="365.0" layoutY="232.0" style="-fx-background-color: mintcream;" />
+      <ChoiceBox layoutX="56.0" layoutY="317.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <ChoiceBox layoutX="57.0" layoutY="144.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <Label layoutX="127.0" layoutY="118.0" text="Kunde" />
+      <Label layoutX="114.0" layoutY="283.0" text="Klippetype" />
+      <Label layoutX="441.0" layoutY="200.0" text="Dato" />
+      <ChoiceBox layoutX="366.0" layoutY="144.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <Label layoutX="445.0" layoutY="118.0" text="Tid" />
+      <ChoiceBox layoutX="57.0" layoutY="231.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <Label layoutX="108.0" layoutY="200.0" text="Medarbejder" />
+   </children>
+</Pane>
