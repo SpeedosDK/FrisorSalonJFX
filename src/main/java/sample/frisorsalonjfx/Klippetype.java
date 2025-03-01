@@ -41,4 +41,8 @@ public class Klippetype {
     public String getName() {
         return klippeStil;
     }
+    @Override
+    public String toString() {
+        return klippeStil;
+    }
 }

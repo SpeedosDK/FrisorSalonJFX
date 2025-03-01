@@ -37,18 +37,31 @@ public class BestillingController {
     public BestillingController() {}
     public void setIBestillinger(IBestillinger bestilling) {
         this.bestilling = bestilling;
+        initData();
     }
+
+    public void initData() {
+        List<Medarbejder> medarbejdere = bestilling.getMedarbejder();
+        cbMedarbejder.getItems().addAll(medarbejdere);
+        List<Kunde> kundere = bestilling.getKunde();
+        kundeChoiceBox.getItems().addAll(kundere);
+        List<Klippetype> klippetyper = bestilling.getKlippetype();
+        cbKlippetype.getItems().addAll(klippetyper);
+        List<LocalTime> tider = bestilling.getTimeAvailable();
+        cbTid.getItems().addAll(tider);
+    }
+
     public void nyBestilling() {
-        List<Bestilling> bestillinger = bestilling.getBestillinger();
         Medarbejder medarbejder = cbMedarbejder.getSelectionModel().getSelectedItem();
         LocalDateTime bestilling_dato = cbDate.getValue().atStartOfDay();
         LocalTime bestilling_time = cbTid.getValue();
         Kunde kunde = kundeChoiceBox.getSelectionModel().getSelectedItem();
         Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
 
-        if (bestilling.opretBestilling(medarbejder, bestilling_dato, bestilling_time, kunde, klippetype)) {
+        if (bestilling.opretBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype)) {
             medarbejderHarTravlt.setVisible(true);
+        } else {
+            medarbejderHarTravlt.setVisible(false);
         }
-
     }
 }

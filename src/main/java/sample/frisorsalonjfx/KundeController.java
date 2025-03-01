@@ -37,7 +37,8 @@ public class KundeController {
 
     private IKunder iKunder;
 
-    public KundeController() {}
+    public KundeController() {
+    }
 
     public void setIKunder(IKunder iKunder) {
         this.iKunder = iKunder;

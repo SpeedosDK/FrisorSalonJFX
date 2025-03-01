@@ -3,6 +3,8 @@ package sample.frisorsalonjfx;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import sample.frisorsalonjfx.Database.BestillingRepo;
+import sample.frisorsalonjfx.Database.KlippetypeRepo;
 
 public class KlippetypeController {
 
@@ -18,11 +20,11 @@ public class KlippetypeController {
 
     private IKlippeType klippeType;
 
-    public KlippetypeController() {}
-
-    public void setKlippeType(IKlippeType klippeType) {
-        this.klippeType = klippeType;
+    public KlippetypeController() {
+        this.klippeType = new KlippeTypeLogic(new KlippetypeRepo());
     }
+
+
 
     @FXML
     public void opretKlippeType() {

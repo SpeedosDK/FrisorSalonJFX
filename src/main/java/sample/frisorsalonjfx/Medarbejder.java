@@ -40,6 +40,10 @@ public class Medarbejder implements Person {
     public void setAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
+    @Override
+    public String toString() {
+        return name;
+    }
 
 
 

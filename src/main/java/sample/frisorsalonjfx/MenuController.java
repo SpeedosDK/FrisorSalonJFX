@@ -38,7 +38,7 @@ public class MenuController {
         Parent root = fxmlLoader.load();
 
         BestillingerController bestillingerController = fxmlLoader.getController();
-        bestillingerController.setiBestillinger(new BestillingLogic(new BestillingRepo()));
+        bestillingerController.setiBestillinger(new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo()));
         Stage stage = (Stage) btnBestillinger.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -63,8 +63,8 @@ public class MenuController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør klippetype.fxml"));
         Parent root = fxmlLoader.load();
 
-        KlippetypeController klippetypeController = fxmlLoader.getController();
-        klippetypeController.setKlippeType(new KlippeTypeLogic(new KlippetypeRepo()));
+//        KlippetypeController klippetypeController = fxmlLoader.getController();
+//        klippetypeController.setKlippeType(new KlippeTypeLogic(new KlippetypeRepo()));
         Stage stage = (Stage) btnKlippetype.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

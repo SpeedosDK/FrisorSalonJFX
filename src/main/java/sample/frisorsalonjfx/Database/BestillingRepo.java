@@ -86,6 +86,27 @@ public class BestillingRepo  implements IBestillingRepository{
 
         return bestillinger;
     }
+
+    @Override
+    public List<Bestilling> readBestillingerByMedarbejder(int medarbejderId) {
+        List<Bestilling> bestillinger = new ArrayList<>();
+        String sql = "SELECT * FROM bestillinger WHERE medarbejder_id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setInt(1, medarbejderId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    // Create and add Bestilling objects to the list
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return bestillinger;
+    }
+
+
     @Override
     public void deleteBestilling(Bestilling bestilling) {
         String sql = "DELETE FROM bestilling WHERE bestilling_id = ?";
