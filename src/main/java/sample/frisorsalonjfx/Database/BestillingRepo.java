@@ -39,7 +39,7 @@ public class BestillingRepo  implements IBestillingRepository{
         String sql = "SELECT b.bestilling_id, b.bestilling_dato, b.bestilling_tid, " +
                 "k.kunde_id, k.name, k.tlfnr, k.email, " +
                 "kl.klippeType_id, kl.klipning, kl.klippe_length, kl.pris, " +
-                "m.medarbejder_id, m.name AS medarbejder_navn " +
+                "m.medarbejder_id, m.name AS medarbejder_navn, m.admin " +
                 "FROM bestillinger b " +
                 "JOIN kunder k ON b.kunde_id = k.kunde_id " +
                 "JOIN klippetype kl ON b.klippeType_id = kl.klippeType_id " +
@@ -72,7 +72,7 @@ public class BestillingRepo  implements IBestillingRepository{
                 // Opret medarbejder-objekt
                 Medarbejder medarbejder = new Medarbejder(
                         resultSet.getInt("medarbejder_id"),
-                        resultSet.getString("name"),
+                        resultSet.getString("medarbejder_navn"),
                         null, // password ligemeget
                         resultSet.getBoolean("admin")
                 );

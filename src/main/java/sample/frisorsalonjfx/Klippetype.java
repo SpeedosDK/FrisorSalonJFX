@@ -38,9 +38,6 @@ public class Klippetype {
         this.timeForCut = timeForCut;
     }
 
-    public String getName() {
-        return klippeStil;
-    }
     @Override
     public String toString() {
         return klippeStil;

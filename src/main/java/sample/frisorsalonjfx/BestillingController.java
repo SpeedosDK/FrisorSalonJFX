@@ -59,9 +59,9 @@ public class BestillingController {
         Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
 
         if (bestilling.opretBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype)) {
-            medarbejderHarTravlt.setVisible(true);
-        } else {
             medarbejderHarTravlt.setVisible(false);
+        } else {
+            medarbejderHarTravlt.setVisible(true);
         }
     }
 }

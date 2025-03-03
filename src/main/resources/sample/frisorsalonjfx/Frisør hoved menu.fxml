@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.MenuController">
    <children>
       <ImageView fitHeight="874.0" fitWidth="853.0" layoutX="-146.0" layoutY="-202.0" opacity="0.78" pickOnBounds="true" preserveRatio="true">

@@ -21,6 +21,7 @@ public class KlippeTypeLogic implements IKlippeType{
     @Override
     public Klippetype createKlippeType(String name, int pris, int tid) throws InputMismatchException {
         try {
+            System.out.println("Laver klippe type: " + name + " " + pris + " " + tid);
             Klippetype klippetype = new Klippetype(1, name, pris, tid);
             klippeTypeRepo.createKlippeType(klippetype);
             return klippetype;

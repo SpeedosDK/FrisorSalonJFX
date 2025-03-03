@@ -37,8 +37,8 @@ public class MenuController {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør bestillinger.fxml"));
         Parent root = fxmlLoader.load();
 
-        BestillingerController bestillingerController = fxmlLoader.getController();
-        bestillingerController.setiBestillinger(new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo()));
+//        BestillingerController bestillingerController = fxmlLoader.getController();
+//        bestillingerController.setiBestillinger(new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo()));
         Stage stage = (Stage) btnBestillinger.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

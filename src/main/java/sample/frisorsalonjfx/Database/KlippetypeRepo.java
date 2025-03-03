@@ -33,9 +33,9 @@ public class KlippetypeRepo implements IKlippeTypeRepository {
             while (resultSet.next()) {
                 int id = resultSet.getInt("klippetype_id");
                 String name = resultSet.getString("klipning");
-                int tid= resultSet.getInt("klippe_length");
                 int pris = resultSet.getInt("pris");
-                klippetyper.add(new Klippetype(id, name, tid, pris));
+                int tid= resultSet.getInt("klippe_length");
+                klippetyper.add(new Klippetype(id, name, pris, tid));
             }
         } catch(SQLException e) {
             e.printStackTrace();

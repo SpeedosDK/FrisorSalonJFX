@@ -15,8 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sample.frisorsalonjfx.Database.BestillingRepo;
-import sample.frisorsalonjfx.Database.IBestillingRepository;
+import sample.frisorsalonjfx.Database.*;
 
 import java.util.List;
 import java.io.IOException;
@@ -53,11 +52,14 @@ public class BestillingerController {
 
     private  IBestillinger iBestillinger;
 
-    public BestillingerController() {}
-    public void setiBestillinger(IBestillinger iBestillinger) {
-        this.iBestillinger = iBestillinger;
-        initData();
+    public BestillingerController() {
+        this.iBestillinger = new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo());
+        //initData();
     }
+//    public void setiBestillinger(IBestillinger iBestillinger) {
+//        this.iBestillinger = iBestillinger;
+//        initData();
+//    }
     @FXML
     public void initialize() {
         // Kobl kolonner til Bestilling-objektets felter
@@ -69,11 +71,11 @@ public class BestillingerController {
         colKunde.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getKunde().getName()));
         colKlippetype.setCellValueFactory(cellData ->
-                new SimpleStringProperty(cellData.getValue().getKlippetype().getName()));
+                new SimpleStringProperty(cellData.getValue().getKlippetype().getKlippeStil()));
         colMedarbejder.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getMedarbejder().getName()));
-        colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getPrice())));
-
+        colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getTimeForCut())));
+        initData();
 
     }
     public void initData() {

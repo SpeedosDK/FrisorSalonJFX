@@ -4,9 +4,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import sample.frisorsalonjfx.Database.MedarbejderRepo;
 
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
@@ -17,6 +19,7 @@ public class HelloApplication extends Application {
 
         LoginController loginController = fxmlLoader.getController();
         loginController.setAuthService(new LoginLogic(new MedarbejderRepo()));
+
         Scene scene = new Scene(root, 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);

@@ -18,11 +18,11 @@
       <TextField fx:id="txfPris" layoutX="54.0" layoutY="174.0" promptText="Pris" style="-fx-background-color: mintcream;" />
       <TextField fx:id="txfKlippetype" layoutX="54.0" layoutY="130.0" promptText="Navn / Klippetype" style="-fx-background-color: mintcream;" />
       <TextField fx:id="txfKlippeTid" layoutX="54.0" layoutY="225.0" promptText="Tid" style="-fx-background-color: mintcream;" />
-      <TableView layoutX="263.0" layoutY="93.0" prefHeight="276.0" prefWidth="316.0" style="-fx-background-color: mintcream;">
+      <TableView fx:id="tvKlippetype" layoutX="263.0" layoutY="93.0" prefHeight="276.0" prefWidth="316.0" style="-fx-background-color: mintcream;">
         <columns>
-          <TableColumn prefWidth="156.0" style="-fx-background-color: mintcream;" text="Klippetype" />
-          <TableColumn minWidth="0.0" prefWidth="79.99993896484375" style="-fx-background-color: mintcream;" text="Pris" />
-            <TableColumn prefWidth="80.66665649414062" style="-fx-background-color: mintcream;" text="Tid" />
+          <TableColumn fx:id="colKlippetypeName" prefWidth="156.0" style="-fx-background-color: mintcream;" text="Klippetype" />
+          <TableColumn fx:id="colKlippePris" minWidth="0.0" prefWidth="79.99993896484375" style="-fx-background-color: mintcream;" text="Pris" />
+            <TableColumn fx:id="colKlippeTid" prefWidth="80.66665649414062" style="-fx-background-color: mintcream;" text="Tid" />
         </columns>
       </TableView>
       <Button fx:id="btnOpret" layoutX="72.0" layoutY="277.0" mnemonicParsing="false" onAction="#opretKlippeType" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: mintcream;" text="Opret klippetype" />

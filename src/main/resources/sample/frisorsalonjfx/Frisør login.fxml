@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
+
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.LoginController">
    <children>
       <Button fx:id="loginButton" layoutX="273.0" layoutY="291.0" mnemonicParsing="false" onAction="#onLoginButtonClick" style="-fx-background-color: mintcream;" text="Login" />
