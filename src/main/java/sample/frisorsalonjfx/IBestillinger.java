@@ -15,7 +15,7 @@ public interface IBestillinger {
 //    boolean opretBestilling(Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype);
     ObservableList<Bestilling> getBestillinger();
     Bestilling deleteBestilling(Bestilling bestilling);
-
+    ObservableList<Bestilling> findBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate);
     boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype);
 
     boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time);

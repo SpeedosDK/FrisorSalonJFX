@@ -2,6 +2,7 @@ package sample.frisorsalonjfx.Database;
 
 import javafx.collections.ObservableList;
 import sample.frisorsalonjfx.Model.Bestilling;
+import sample.frisorsalonjfx.Model.Klippetype;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -12,6 +13,6 @@ public interface IBestillingRepository {
     ObservableList<Bestilling> readBestillinger();
     List<Bestilling> readBestillingerByMedarbejder(int medarbejderId);
     void deleteBestilling(Bestilling bestilling);
-
+    ObservableList<Bestilling> searchBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate);
     boolean isMedarbejderAvailable(int medarbejderId, LocalDateTime bestillingDato, LocalTime bestillingTid);
 }

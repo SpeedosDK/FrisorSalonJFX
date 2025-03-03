@@ -68,11 +68,18 @@ public class BestillingLogic implements IBestillinger {
     public ObservableList<Bestilling> getBestillinger() {
         return bestillingRepo.readBestillinger();
     }
+
+
     @Override
     public Bestilling deleteBestilling(Bestilling b) {
         bestillingRepo.deleteBestilling(b);
         return b;
     }
+
+    public ObservableList<Bestilling> findBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate) {
+        return bestillingRepo.searchBestilling(searchedName, searchedMedarbejder, searchedDate);
+    }
+
     @Override
     public List<Medarbejder> getMedarbejder() {
         return medarbejderRepo.readMedarbejdere();

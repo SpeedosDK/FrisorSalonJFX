@@ -19,7 +19,7 @@ public class BestillingController {
     private ChoiceBox<Medarbejder> cbMedarbejder;
 
     @FXML
-    private DatePicker cbDate;
+    private DatePicker datePicker;
 
     @FXML
     private ChoiceBox<LocalTime> cbTid;
@@ -55,7 +55,7 @@ public class BestillingController {
 
     public void nyBestilling() {
         Medarbejder medarbejder = cbMedarbejder.getSelectionModel().getSelectedItem();
-        LocalDateTime bestilling_dato = cbDate.getValue().atStartOfDay();
+        LocalDateTime bestilling_dato = datePicker.getValue().atStartOfDay();
         LocalTime bestilling_time = cbTid.getValue();
         Kunde kunde = kundeChoiceBox.getSelectionModel().getSelectedItem();
         Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
@@ -66,5 +66,6 @@ public class BestillingController {
             medarbejderHarTravlt.setVisible(true);
         }
     }
+
     public void goBack() {}
 }

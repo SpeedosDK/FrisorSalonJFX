@@ -14,7 +14,7 @@
             <Font name="Californian FB Italic" size="43.0" />
          </font>
       </Label>
-      <DatePicker fx:id="cbDate" layoutX="365.0" layoutY="232.0" style="-fx-background-color: mintcream;" />
+      <DatePicker fx:id="datePicker" layoutX="365.0" layoutY="232.0" style="-fx-background-color: mintcream;" />
       <ChoiceBox fx:id="cbKlippetype" layoutX="56.0" layoutY="317.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
       <ChoiceBox fx:id="kundeChoiceBox" layoutX="57.0" layoutY="144.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
       <Label layoutX="127.0" layoutY="118.0" text="Kunde" />

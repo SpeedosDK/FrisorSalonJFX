@@ -7,18 +7,19 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import sample.frisorsalonjfx.Model.Bestilling;
+import sample.frisorsalonjfx.Model.Klippetype;
+import sample.frisorsalonjfx.Model.Medarbejder;
 import sample.frisorsalonjfx.UseCases.BestillingLogic;
 import sample.frisorsalonjfx.Database.*;
 import sample.frisorsalonjfx.IBestillinger;
 
 import java.io.IOException;
 import java.time.*;
+import java.util.List;
 
 public class BestillingerController {
 
@@ -28,6 +29,8 @@ public class BestillingerController {
     private Button btnRedigerBestilling;
     @FXML
     private Button btnSletBestilling;
+    @FXML
+    private Button btnFindBestilling;
     @FXML
     private TableView<Bestilling> bestillingTableView;
     @FXML
@@ -46,9 +49,15 @@ public class BestillingerController {
     private TableColumn<Bestilling, String> colPris;
     @FXML
     private Button backtoMenuButton;
-
+    @FXML
+    private DatePicker datePicker;
+    @FXML
+    private TextField navnTextField;
+    @FXML
+    private ComboBox<Medarbejder> cbMedarbejder;
+    @FXML
     private ObservableList<Bestilling> bestillingList = FXCollections.observableArrayList();
-
+    @FXML
     private IBestillinger iBestillinger;
 
     public BestillingerController() {
@@ -75,14 +84,17 @@ public class BestillingerController {
                 new SimpleStringProperty(cellData.getValue().getMedarbejder().getName()));
         colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getTimeForCut())));
         initData();
-
     }
+
     public void initData() {
         if (iBestillinger != null) {
             bestillingList.addAll(iBestillinger.getBestillinger());
             bestillingTableView.setItems(bestillingList);
         }
+
+
     }
+
 
     @FXML
     public void changeToOpretBestilling() throws IOException {
@@ -112,6 +124,18 @@ public class BestillingerController {
             iBestillinger.deleteBestilling(slettetBestilling);
             bestillingTableView.getItems().remove(slettetBestilling);
         }
+    }
+
+
+    @FXML
+    public void findBestilling() {
+        String searchedName = navnTextField.getText();
+        String searchedMedarbejder = cbMedarbejder.getSelectionModel().getSelectedItem().toString();
+        LocalDateTime searchedDate = datePicker.getValue().atStartOfDay();
+
+        bestillingList.clear();
+        bestillingList.addAll(iBestillinger.findBestilling(searchedName, searchedMedarbejder, searchedDate));
+
     }
 
     @FXML

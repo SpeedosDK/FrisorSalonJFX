@@ -109,7 +109,6 @@ public class BestillingRepo  implements IBestillingRepository{
         return bestillinger;
     }
 
-
     @Override
     public void deleteBestilling(Bestilling bestilling) {
         String sql = "DELETE FROM bestillinger WHERE bestilling_id = ?";
@@ -125,6 +124,7 @@ public class BestillingRepo  implements IBestillingRepository{
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean isMedarbejderAvailable(int medarbejderId, LocalDateTime bestillingDato, LocalTime bestillingTid) {
         String sql = "SELECT COUNT(*) FROM bestillinger WHERE medarbejder_id = ? AND bestilling_dato = ? AND bestilling_tid = ?";
@@ -141,6 +141,61 @@ public class BestillingRepo  implements IBestillingRepository{
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public ObservableList<Bestilling> searchBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate) {
+        ObservableList<Bestilling> foundBestillinger = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM bestillinger "
+                + "JOIN kunder k ON bestillinger.kunde_id = k.kunde_id "
+                + "JOIN medarbejder m ON bestillinger.medarbejder_id = m.medarbejder_id "
+                + "WHERE (bestillinger.bestilling_dato = ?) "
+                + "OR k.name LIKE ? "
+                + "OR m.medarbejder_name LIKE ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(searchedDate));
+            preparedStatement.setString(2, "%" + searchedName + "%");
+            preparedStatement.setString(3, "%" + searchedMedarbejder + "%");
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int id = resultSet.getInt("bestilling_id");
+                    LocalDateTime dato = resultSet.getTimestamp("bestilling_dato").toLocalDateTime();
+                    LocalTime tid = resultSet.getTime("bestilling_tid").toLocalTime();
+
+                    // Opret kunde-objekt
+                    Kunde kunde = new Kunde(
+                            resultSet.getInt("kunde_id"),
+                            resultSet.getString("name"),
+                            resultSet.getInt("tlfnr"),
+                            resultSet.getString("email")
+                    );
+
+                    // Opret klippetype-objekt
+                    Klippetype klippetype = new Klippetype(
+                            resultSet.getInt("klippeType_id"),
+                            resultSet.getString("klipning"),
+                            resultSet.getInt("klippe_length"),
+                            resultSet.getInt("pris")
+                    );
+
+                    // Opret medarbejder-objekt
+                    Medarbejder medarbejder = new Medarbejder(
+                            resultSet.getInt("medarbejder_id"),
+                            resultSet.getString("medarbejder_navn"),
+                            null, // password ligemeget
+                            resultSet.getBoolean("admin")
+                    );
+                    foundBestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, klippetype));
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return foundBestillinger;
     }
 
 }

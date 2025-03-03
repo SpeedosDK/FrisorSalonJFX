@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="649.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.BestillingerController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="649.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.BestillingerController">
    <children>
       <Label alignment="TOP_CENTER" layoutX="180.0" layoutY="22.0" prefHeight="76.0" prefWidth="240.0" text="Bestillinger" textFill="WHITE">
          <font>
             <Font name="Californian FB Italic" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="bestillingTableView" layoutX="132.0" layoutY="84.0" prefHeight="292.0" prefWidth="515.0" style="-fx-background-color: mintcream;">
+      <TableView fx:id="bestillingTableView" layoutX="217.0" layoutY="107.0" prefHeight="269.0" prefWidth="430.0" style="-fx-background-color: mintcream;">
         <columns>
           <TableColumn fx:id="colId" prefWidth="45.99993896484375" style="-fx-background-color: mintcream;" text="ID" />
           <TableColumn fx:id="colKunde" minWidth="0.0" prefWidth="65.99998474121094" style="-fx-background-color: mintcream;" text="Navn" />
@@ -25,14 +28,24 @@
             <TableColumn fx:id="colMedarbejder" prefWidth="83.66668701171875" style="-fx-background-color: mintcream;" text="Medarbejder" />
         </columns>
       </TableView>
-      <Button fx:id="btnSletBestilling" layoutX="10.0" layoutY="246.0" mnemonicParsing="false" onAction="#sletBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Slet bestilling" />
-      <Button fx:id="btnRedigerBestilling" layoutX="10.0" layoutY="207.0" mnemonicParsing="false" onAction="#changeToRedigerBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Rediger bestilling" />
-      <Label alignment="TOP_CENTER" layoutX="1.0" layoutY="118.0" prefHeight="37.0" prefWidth="135.0" text="Vælg bestilling" textFill="WHITE">
+      <Button fx:id="btnSletBestilling" layoutX="10.0" layoutY="169.0" mnemonicParsing="false" onAction="#sletBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Slet bestilling" />
+      <Button fx:id="btnRedigerBestilling" layoutX="10.0" layoutY="131.0" mnemonicParsing="false" onAction="#changeToRedigerBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Rediger bestilling" />
+      <Label alignment="TOP_CENTER" layoutX="1.0" layoutY="60.0" prefHeight="37.0" prefWidth="135.0" text="Vælg bestilling" textFill="WHITE">
          <font>
             <Font name="Californian FB Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="btnOpretBestilling" layoutX="10.0" layoutY="169.0" mnemonicParsing="false" onAction="#changeToOpretBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Opret bestilling" />
+      <Button fx:id="btnOpretBestilling" layoutX="10.0" layoutY="92.0" mnemonicParsing="false" onAction="#changeToOpretBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Opret bestilling" />
       <Button fx:id="backtoMenuButton" layoutX="33.0" layoutY="22.0" mnemonicParsing="false" onAction="#backToMenu" text="Gå tilbage" />
+      <Button fx:id="btnFindBestilling" layoutX="11.0" layoutY="368.0" mnemonicParsing="false" onAction="#findBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Søg efter bestilling" />
+      <TextField fx:id="navnTextField" layoutX="10.0" layoutY="242.0" promptText="Navn" />
+      <Label alignment="TOP_CENTER" layoutX="1.0" layoutY="207.0" prefHeight="37.0" prefWidth="135.0" text="Find bestilling" textFill="WHITE">
+         <font>
+            <Font name="Californian FB Bold" size="18.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="cbKlippetype" layoutX="9.0" layoutY="275.0" prefWidth="150.0" promptText="Klippetype" />
+      <DatePicker fx:id="datePicker" layoutX="10.0" layoutY="336.0" prefHeight="25.0" prefWidth="149.0" />
+      <ComboBox fx:id="cbMedarbejder" layoutX="9.0" layoutY="305.0" prefHeight="25.0" prefWidth="150.0" promptText="Medarbejder" />
    </children>
 </Pane>
