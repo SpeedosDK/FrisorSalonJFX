@@ -14,16 +14,16 @@ public class BestillingRepo  implements IBestillingRepository{
 
     @Override
     public void createBestilling(Bestilling bestilling) {
-        String sql = "INSERT INTO bestillinger (bestilling_id, bestilling_dato, bestilling_tid, kunde_id, klippeType_id, medarbejder_id) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bestillinger (bestilling_dato, bestilling_tid, kunde_id, klippeType_id, medarbejder_id) VALUES (?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-            preparedStatement.setInt(1, bestilling.getId());
-            preparedStatement.setTimestamp(2, Timestamp.valueOf(bestilling.getBestilling_dato()));
-            preparedStatement.setTime(3, Time.valueOf(bestilling.getBestilling_time()));
-            preparedStatement.setInt(4, bestilling.getKunde().getId());
-            preparedStatement.setInt(5, bestilling.getKlippetype().getId());
-            preparedStatement.setInt(6, bestilling.getMedarbejder().getId());
+//            preparedStatement.setInt(1, bestilling.getId());
+            preparedStatement.setTimestamp(1, Timestamp.valueOf(bestilling.getBestilling_dato()));
+            preparedStatement.setTime(2, Time.valueOf(bestilling.getBestilling_time()));
+            preparedStatement.setInt(3, bestilling.getKunde().getId());
+            preparedStatement.setInt(4, bestilling.getKlippetype().getId());
+            preparedStatement.setInt(5, bestilling.getMedarbejder().getId());
 
             int rowInserted = preparedStatement.executeUpdate();
             if (rowInserted > 0) {
@@ -109,7 +109,7 @@ public class BestillingRepo  implements IBestillingRepository{
 
     @Override
     public void deleteBestilling(Bestilling bestilling) {
-        String sql = "DELETE FROM bestilling WHERE bestilling_id = ?";
+        String sql = "DELETE FROM bestillinger WHERE bestilling_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -122,4 +122,22 @@ public class BestillingRepo  implements IBestillingRepository{
             e.printStackTrace();
         }
     }
+    @Override
+    public boolean isMedarbejderAvailable(int medarbejderId, LocalDateTime bestillingDato, LocalTime bestillingTid) {
+        String sql = "SELECT COUNT(*) FROM bestillinger WHERE medarbejder_id = ? AND bestilling_dato = ? AND bestilling_tid = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setInt(1, medarbejderId);
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(bestillingDato));
+            preparedStatement.setTime(3, Time.valueOf(bestillingTid));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1) == 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

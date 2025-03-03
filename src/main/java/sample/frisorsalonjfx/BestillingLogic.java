@@ -47,7 +47,7 @@ public class BestillingLogic implements IBestillinger {
 
     @Override
     public boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype) {
-        if (isMedarbejderAvailable(medarbejder, date, time, klippetype)) {
+        if (isMedarbejderAvailable(medarbejder, date, time)) {
             Bestilling bestilling = new Bestilling(id, medarbejder, date, time, kunde, klippetype);
             bestillingRepo.createBestilling(bestilling);
             return true;
@@ -56,20 +56,8 @@ public class BestillingLogic implements IBestillinger {
     }
 
     @Override
-    public boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time, Klippetype klippetype) {
-        List<Bestilling> exsitingBestillinger = bestillingRepo.readBestillingerByMedarbejder(medarbejder.getId());
-        LocalDateTime requestedStart = date.with(time);
-        LocalDateTime requestedEnd = requestedStart.plusMinutes(klippetype.getTimeForCut());
-
-        for (Bestilling bestilling : exsitingBestillinger) {
-            LocalDateTime bestillingStart = bestilling.getBestilling_dato().with(bestilling.getBestilling_time());
-            LocalDateTime bestillingEnd = bestillingStart.plusMinutes(bestilling.getKlippetype().getTimeForCut());
-
-            if (requestedStart.isBefore(bestillingEnd) && requestedEnd.isAfter(bestillingStart)) {
-                return false;
-            }
-        }
-        return true;
+    public boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time) {
+        return bestillingRepo.isMedarbejderAvailable(medarbejder.getId(), date, time);
     }
     @Override
     public ObservableList<Bestilling> getBestillinger() {

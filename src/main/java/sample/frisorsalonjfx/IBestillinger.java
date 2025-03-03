@@ -14,7 +14,7 @@ public interface IBestillinger {
 
     boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype);
 
-    boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Klippetype klippetype);
+    boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time);
     List<Medarbejder> getMedarbejder();
     List<Kunde> getKunde();
     List<Klippetype> getKlippetype();
