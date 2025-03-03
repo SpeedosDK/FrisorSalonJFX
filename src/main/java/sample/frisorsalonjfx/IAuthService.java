@@ -1,5 +1,9 @@
 package sample.frisorsalonjfx;
 
+import sample.frisorsalonjfx.Model.Medarbejder;
+import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
+
 public interface IAuthService {
-    boolean login(String username, String password);
+    Medarbejder login(String username, String password);
+    MedarbejderLogic getMedarbejderLogic();
 }

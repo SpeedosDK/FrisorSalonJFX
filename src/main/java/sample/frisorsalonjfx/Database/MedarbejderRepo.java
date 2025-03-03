@@ -27,7 +27,7 @@ public class MedarbejderRepo implements IMedarbejderRepository {
     }
     @Override
     public void deleteMedarbejder(Medarbejder medarbejder) {
-        String sql = "DELETE FROM medarbejder WHERE id = ?";
+        String sql = "DELETE FROM medarbejder WHERE medarbejder_id = ?";
         try(Connection connection = DatabaseConnection.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setInt(1, medarbejder.getId());

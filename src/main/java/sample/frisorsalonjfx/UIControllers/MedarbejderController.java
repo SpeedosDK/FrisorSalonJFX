@@ -9,8 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.Database.MedarbejderRepo;
 import sample.frisorsalonjfx.IMedarbejder;
 import sample.frisorsalonjfx.Model.Medarbejder;
+import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
 
 import java.io.IOException;
 
@@ -40,7 +42,8 @@ public class MedarbejderController {
     private ObservableList<Medarbejder> medarbejderList = FXCollections.observableArrayList();
 
 
-    public MedarbejderController() {}
+    public MedarbejderController() {
+    }
 
     public void setiMedarbejder(IMedarbejder iMedarbejder) {
         this.iMedarbejder = iMedarbejder;
@@ -77,7 +80,8 @@ public class MedarbejderController {
     @FXML
     public void deleteMedarbejder() {
        try {
-           if (tblMedarbejder.getSelectionModel().getSelectedItem() != null) {
+           Medarbejder selectedMedarbejder = tblMedarbejder.getSelectionModel().getSelectedItem();
+           if (selectedMedarbejder != null) {
                Medarbejder medarbejder = tblMedarbejder.getSelectionModel().getSelectedItem();
                iMedarbejder.deleteMedarbejder(medarbejder);
                tblMedarbejder.getItems().remove(medarbejder);

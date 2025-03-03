@@ -6,8 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import sample.frisorsalonjfx.Database.MedarbejderRepo;
 import sample.frisorsalonjfx.IAuthService;
 import sample.frisorsalonjfx.LoginException;
+import sample.frisorsalonjfx.Model.Medarbejder;
+import sample.frisorsalonjfx.UseCases.LoginLogic;
+import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
 
 import java.io.IOException;
 
@@ -22,20 +26,24 @@ public class LoginController {
     @FXML
     private Label wrongLoginLabel;
 
+    //IAuthService authService;
+
     IAuthService authService;
-
-
     public LoginController() {}
-//    public LoginController(IAuthService authService) {
-//        this.authService = authService;
-//    }
+    public LoginController(IAuthService authService) {
+        this.authService = authService;
+    }
 
     public void setAuthService(IAuthService authService) {
         this.authService = authService;
     }
 
+
+
     @FXML
     public void onLoginButtonClick() {
+
+
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -44,35 +52,40 @@ public class LoginController {
             return;
         }
 
-        boolean loggedIn;
+
+
+        Medarbejder medarbejder;
         try {
-            loggedIn = authService.login(username, password);
+            medarbejder = authService.login(username, password);
+            if (medarbejder == null) {
+                wrongLoginLabel.setText("Medarbejder findes ikke");
+                return;
+            }
+            System.out.println(medarbejder.getName());
         } catch (LoginException e) {
             wrongLoginLabel.setText(e.getMessage());
             return;
         }
 
-        if (loggedIn) {
-            try{
-                changeToMenu();
-            } catch (IOException e) {
-                wrongLoginLabel.setText("Kunne ikke skifte scene");
-                e.printStackTrace();
-            }
-        } else {
-            wrongLoginLabel.setText("Forkert brugernavn eller password");
+        try {
+            changeToMenu();
+        } catch (IOException e) {
+            wrongLoginLabel.setText("Kunne ikke skifte scene");
+            e.printStackTrace();
         }
     }
 
     private boolean isValidInput(String username, String password) {
         return !username.isEmpty() && !password.isEmpty();
     }
-    
+
     @FXML
     public void changeToMenu() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
 
+        MenuController menuController = fxmlLoader.getController();
+        menuController.setMedarbejderLogic(authService.getMedarbejderLogic());
         Stage stage = (Stage) loginButton.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

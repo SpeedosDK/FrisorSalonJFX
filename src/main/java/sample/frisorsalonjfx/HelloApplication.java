@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.Database.IMedarbejderRepository;
 import sample.frisorsalonjfx.Database.MedarbejderRepo;
 import sample.frisorsalonjfx.UIControllers.LoginController;
 import sample.frisorsalonjfx.UseCases.LoginLogic;
+import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
 
 import java.io.IOException;
 
@@ -17,8 +19,11 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Frisør login.fxml"));
         Parent root = fxmlLoader.load();
 
+
+
         LoginController loginController = fxmlLoader.getController();
-        loginController.setAuthService(new LoginLogic(new MedarbejderRepo()));
+        loginController.setAuthService(new LoginLogic(new MedarbejderRepo(), new MedarbejderLogic(new MedarbejderRepo())));
+
 
         Scene scene = new Scene(root, 320, 240);
         stage.setTitle("Hello!");

@@ -8,4 +8,5 @@ public interface IMedarbejderRepository {
     void createMedarbejder(Medarbejder medarbejder);
     void deleteMedarbejder(Medarbejder medarbejder);
     ObservableList<Medarbejder> readMedarbejdere();
+
 }

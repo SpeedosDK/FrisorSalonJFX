@@ -15,6 +15,8 @@ import java.io.IOException;
 
 public class MenuController {
 
+    private MedarbejderLogic medarbejderLogic;
+
     @FXML
     private Button btnBestillinger;
     @FXML
@@ -24,6 +26,10 @@ public class MenuController {
     @FXML
     private Button btnMedarbejder;
 
+
+    public void setMedarbejderLogic(MedarbejderLogic medarbejderLogic) {
+        this.medarbejderLogic = medarbejderLogic;
+    }
     @FXML
     public void changeToBestillinger() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør bestillinger.fxml"));
@@ -69,7 +75,7 @@ public class MenuController {
         Parent root = fxmlLoader.load();
 
         MedarbejderController medarbejderController = fxmlLoader.getController();
-        medarbejderController.setiMedarbejder(new MedarbejderLogic(new MedarbejderRepo()));
+        medarbejderController.setiMedarbejder(this.medarbejderLogic);
         Stage stage = (Stage) btnMedarbejder.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

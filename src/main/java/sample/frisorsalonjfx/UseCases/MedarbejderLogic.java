@@ -2,6 +2,7 @@ package sample.frisorsalonjfx.UseCases;
 
 import javafx.collections.ObservableList;
 import sample.frisorsalonjfx.Database.IMedarbejderRepository;
+import sample.frisorsalonjfx.IAuthService;
 import sample.frisorsalonjfx.IMedarbejder;
 import sample.frisorsalonjfx.Model.Medarbejder;
 
@@ -14,10 +15,16 @@ public class MedarbejderLogic implements IMedarbejder {
     public MedarbejderLogic(IMedarbejderRepository medarbejderRepo) {
         this.medarbejderRepo = medarbejderRepo;
     }
-    private void setCurrentUser(Medarbejder currentUser) {
+
+    @Override
+    public void setCurrentUser(Medarbejder currentUser) {
         this.currentUser = currentUser;
     }
+    public Medarbejder getCurrentUser() {
+        return currentUser;
+    }
     private boolean isAdmin(Medarbejder currentUser) {
+        System.out.println(currentUser.isAdmin());
         return currentUser != null && currentUser.isAdmin();
     }
     @Override
@@ -38,7 +45,7 @@ public class MedarbejderLogic implements IMedarbejder {
     @Override
     public Medarbejder deleteMedarbejder(Medarbejder medarbejder) throws SecurityException {
 
-        if (!isAdmin(currentUser)) {
+        if (!isAdmin(getCurrentUser())) {
             throw new SecurityException("Du skal være admin for at slette medarbejder");
         }
         medarbejderRepo.deleteMedarbejder(medarbejder);
