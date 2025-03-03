@@ -1,4 +1,5 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.Model;
+
 import java.time.LocalTime;
 import java.time.LocalDateTime;
 

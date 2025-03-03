@@ -1,4 +1,4 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.IMedarbejder;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
 import java.io.IOException;
 
@@ -89,7 +91,7 @@ public class MedarbejderController {
 
     @FXML
     public void goToMenu() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør hoved menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) btnGoBack.getScene().getWindow();
         Scene scene = new Scene(root);

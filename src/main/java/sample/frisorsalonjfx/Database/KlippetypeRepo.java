@@ -2,7 +2,7 @@ package sample.frisorsalonjfx.Database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sample.frisorsalonjfx.Klippetype;
+import sample.frisorsalonjfx.Model.Klippetype;
 
 import java.sql.*;
 

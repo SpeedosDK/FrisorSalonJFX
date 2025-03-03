@@ -1,4 +1,6 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.Model;
+
+import sample.frisorsalonjfx.Person;
 
 public class Medarbejder implements Person {
     private int id;

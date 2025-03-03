@@ -2,7 +2,10 @@ package sample.frisorsalonjfx.Database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import sample.frisorsalonjfx.*;
+import sample.frisorsalonjfx.Model.Bestilling;
+import sample.frisorsalonjfx.Model.Klippetype;
+import sample.frisorsalonjfx.Model.Kunde;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
 import java.sql.*;
 import java.time.LocalDateTime;

@@ -1,7 +1,7 @@
 package sample.frisorsalonjfx.Database;
 
 import javafx.collections.ObservableList;
-import sample.frisorsalonjfx.Kunde;
+import sample.frisorsalonjfx.Model.Kunde;
 
 public interface IKundeRepository {
 

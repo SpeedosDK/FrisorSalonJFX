@@ -1,12 +1,13 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UseCases;
 
 import javafx.collections.ObservableList;
 import sample.frisorsalonjfx.Database.IKundeRepository;
-import sample.frisorsalonjfx.Database.KundeRepo;
+import sample.frisorsalonjfx.IKunder;
+import sample.frisorsalonjfx.Model.Kunde;
 
 import java.util.InputMismatchException;
 
-public class KundeLogic  implements IKunder{
+public class KundeLogic  implements IKunder {
 
     private final IKundeRepository kundeRepo;
 

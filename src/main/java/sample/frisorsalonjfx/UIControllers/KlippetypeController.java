@@ -1,4 +1,4 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -6,6 +6,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import sample.frisorsalonjfx.Database.KlippetypeRepo;
+import sample.frisorsalonjfx.IKlippeType;
+import sample.frisorsalonjfx.UseCases.KlippeTypeLogic;
+import sample.frisorsalonjfx.Model.Klippetype;
 
 public class KlippetypeController {
 

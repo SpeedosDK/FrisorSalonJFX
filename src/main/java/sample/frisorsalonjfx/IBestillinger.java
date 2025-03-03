@@ -1,6 +1,10 @@
 package sample.frisorsalonjfx;
 
 import javafx.collections.ObservableList;
+import sample.frisorsalonjfx.Model.Bestilling;
+import sample.frisorsalonjfx.Model.Klippetype;
+import sample.frisorsalonjfx.Model.Kunde;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;

@@ -1,7 +1,7 @@
 package sample.frisorsalonjfx.Database;
 
 import javafx.collections.ObservableList;
-import sample.frisorsalonjfx.Klippetype;
+import sample.frisorsalonjfx.Model.Klippetype;
 
 public interface IKlippeTypeRepository {
 

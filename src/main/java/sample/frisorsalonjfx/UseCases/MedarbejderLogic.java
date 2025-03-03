@@ -1,10 +1,11 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UseCases;
 
 import javafx.collections.ObservableList;
 import sample.frisorsalonjfx.Database.IMedarbejderRepository;
-import sample.frisorsalonjfx.Database.MedarbejderRepo;
+import sample.frisorsalonjfx.IMedarbejder;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
-public class MedarbejderLogic implements IMedarbejder{
+public class MedarbejderLogic implements IMedarbejder {
 
     private final IMedarbejderRepository medarbejderRepo;
     Medarbejder currentUser;

@@ -1,10 +1,15 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UseCases;
 
 import javafx.collections.ObservableList;
+import sample.frisorsalonjfx.*;
 import sample.frisorsalonjfx.Database.IBestillingRepository;
 import sample.frisorsalonjfx.Database.IKlippeTypeRepository;
 import sample.frisorsalonjfx.Database.IKundeRepository;
 import sample.frisorsalonjfx.Database.IMedarbejderRepository;
+import sample.frisorsalonjfx.Model.Bestilling;
+import sample.frisorsalonjfx.Model.Klippetype;
+import sample.frisorsalonjfx.Model.Kunde;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
 import java.time.*;
 import java.util.List;

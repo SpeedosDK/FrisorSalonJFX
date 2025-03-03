@@ -1,4 +1,4 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.*;
+import sample.frisorsalonjfx.IAuthService;
+import sample.frisorsalonjfx.LoginException;
 
 import java.io.IOException;
 
@@ -68,7 +70,7 @@ public class LoginController {
     
     @FXML
     public void changeToMenu() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør hoved menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
 
         Stage stage = (Stage) loginButton.getScene().getWindow();

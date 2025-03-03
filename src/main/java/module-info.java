@@ -17,4 +17,11 @@ module sample.frisorsalonjfx {
     exports sample.frisorsalonjfx;
     exports sample.frisorsalonjfx.Database;
     opens sample.frisorsalonjfx.Database to javafx.fxml;
+    exports sample.frisorsalonjfx.UIControllers;
+    opens sample.frisorsalonjfx.UIControllers to javafx.fxml;
+    exports sample.frisorsalonjfx.UseCases;
+    opens sample.frisorsalonjfx.UseCases to javafx.fxml;
+    exports sample.frisorsalonjfx.Model;
+    opens sample.frisorsalonjfx.Model to javafx.fxml;
+
 }

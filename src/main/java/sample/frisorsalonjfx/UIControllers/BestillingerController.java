@@ -1,12 +1,9 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
@@ -15,9 +12,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.Model.Bestilling;
+import sample.frisorsalonjfx.UseCases.BestillingLogic;
 import sample.frisorsalonjfx.Database.*;
+import sample.frisorsalonjfx.IBestillinger;
 
-import java.util.List;
 import java.io.IOException;
 import java.time.*;
 
@@ -50,7 +49,7 @@ public class BestillingerController {
 
     private ObservableList<Bestilling> bestillingList = FXCollections.observableArrayList();
 
-    private  IBestillinger iBestillinger;
+    private IBestillinger iBestillinger;
 
     public BestillingerController() {
         this.iBestillinger = new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo());
@@ -87,7 +86,7 @@ public class BestillingerController {
 
     @FXML
     public void changeToOpretBestilling() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør opret bestilling.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør opret bestilling.fxml"));
         Parent root = fxmlLoader.load();
 
         BestillingController bestillingController = fxmlLoader.getController();

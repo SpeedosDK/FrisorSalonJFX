@@ -1,11 +1,13 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
-import sample.frisorsalonjfx.Database.BestillingRepo;
+import sample.frisorsalonjfx.IBestillinger;
+import sample.frisorsalonjfx.Model.Klippetype;
+import sample.frisorsalonjfx.Model.Kunde;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
-import javafx.scene.control.*;
 import java.time.*;
 import java.util.List;
 
@@ -64,4 +66,5 @@ public class BestillingController {
             medarbejderHarTravlt.setVisible(true);
         }
     }
+    public void goBack() {}
 }

@@ -1,6 +1,8 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UseCases;
 import sample.frisorsalonjfx.Database.IMedarbejderRepository;
-import sample.frisorsalonjfx.Database.MedarbejderRepo;
+import sample.frisorsalonjfx.IAuthService;
+import sample.frisorsalonjfx.LoginException;
+import sample.frisorsalonjfx.Model.Medarbejder;
 
 import java.util.List;
 

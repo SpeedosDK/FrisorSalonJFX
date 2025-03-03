@@ -1,4 +1,4 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,8 +8,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.frisorsalonjfx.Database.IKundeRepository;
-import sample.frisorsalonjfx.Database.KundeRepo;
+import sample.frisorsalonjfx.IKunder;
+import sample.frisorsalonjfx.Model.Kunde;
 
 public class KundeController {
 

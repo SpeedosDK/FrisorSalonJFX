@@ -1,6 +1,7 @@
 package sample.frisorsalonjfx;
 
 import javafx.collections.ObservableList;
+import sample.frisorsalonjfx.Model.Kunde;
 
 public interface IKunder {
 

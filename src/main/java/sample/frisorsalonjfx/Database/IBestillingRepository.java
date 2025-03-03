@@ -1,10 +1,8 @@
 package sample.frisorsalonjfx.Database;
 
 import javafx.collections.ObservableList;
-import sample.frisorsalonjfx.Bestilling;
-import sample.frisorsalonjfx.Medarbejder;
+import sample.frisorsalonjfx.Model.Bestilling;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;

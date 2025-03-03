@@ -1,4 +1,4 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.Model;
 
 public class Klippetype {
     private int id;

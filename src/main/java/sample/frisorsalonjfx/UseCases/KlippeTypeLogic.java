@@ -1,17 +1,13 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UseCases;
 
 import javafx.collections.ObservableList;
-import sample.frisorsalonjfx.Database.DatabaseConnection;
 import sample.frisorsalonjfx.Database.IKlippeTypeRepository;
-import sample.frisorsalonjfx.Database.KlippetypeRepo;
+import sample.frisorsalonjfx.IKlippeType;
+import sample.frisorsalonjfx.Model.Klippetype;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.InputMismatchException;
 
-public class KlippeTypeLogic implements IKlippeType{
+public class KlippeTypeLogic implements IKlippeType {
 
     private final IKlippeTypeRepository klippeTypeRepo;
 

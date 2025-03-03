@@ -1,25 +1,17 @@
-package sample.frisorsalonjfx;
+package sample.frisorsalonjfx.UIControllers;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import sample.frisorsalonjfx.Database.BestillingRepo;
-import sample.frisorsalonjfx.Database.KlippetypeRepo;
 import sample.frisorsalonjfx.Database.KundeRepo;
 import sample.frisorsalonjfx.Database.MedarbejderRepo;
+import sample.frisorsalonjfx.UseCases.KundeLogic;
+import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
 
-import java.util.List;
 import java.io.IOException;
-import java.time.*;
 
 public class MenuController {
 
@@ -34,7 +26,7 @@ public class MenuController {
 
     @FXML
     public void changeToBestillinger() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør bestillinger.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør bestillinger.fxml"));
         Parent root = fxmlLoader.load();
 
 //        BestillingerController bestillingerController = fxmlLoader.getController();
@@ -47,7 +39,7 @@ public class MenuController {
 
     @FXML
     public void changeToKunder() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OpretKunde.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/OpretKunde.fxml"));
         Parent root = fxmlLoader.load();
 
         KundeController kundeController = fxmlLoader.getController();
@@ -60,7 +52,7 @@ public class MenuController {
 
     @FXML
     public void changeToKlippetype() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør klippetype.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør klippetype.fxml"));
         Parent root = fxmlLoader.load();
 
 //        KlippetypeController klippetypeController = fxmlLoader.getController();
@@ -73,7 +65,7 @@ public class MenuController {
 
     @FXML
     public void changeToMedarbejder() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør opret medarbejder.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør opret medarbejder.fxml"));
         Parent root = fxmlLoader.load();
 
         MedarbejderController medarbejderController = fxmlLoader.getController();

@@ -2,8 +2,7 @@ package sample.frisorsalonjfx.Database;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.Initializable;
-import sample.frisorsalonjfx.Kunde;
+import sample.frisorsalonjfx.Model.Kunde;
 
 import java.sql.*;
 
