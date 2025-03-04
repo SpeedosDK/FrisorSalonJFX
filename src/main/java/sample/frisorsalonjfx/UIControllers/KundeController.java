@@ -3,13 +3,19 @@ package sample.frisorsalonjfx.UIControllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import sample.frisorsalonjfx.IKunder;
 import sample.frisorsalonjfx.Model.Kunde;
+
+import java.io.IOException;
 
 public class KundeController {
 
@@ -33,6 +39,10 @@ public class KundeController {
     private ObservableList<Kunde> kundeListe = FXCollections.observableArrayList();
     @FXML
     private Button btnOpretKunde;
+
+    @FXML
+    private Button backToMenuButton;
+
 
 
     private IKunder iKunder;
@@ -79,6 +89,15 @@ public class KundeController {
             iKunder.deleteKunde(slettetKunde);
             tblKunde.getItems().remove(slettetKunde);
         }
+    }
+
+    @FXML
+    public void backToMenu() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) backToMenuButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
 }

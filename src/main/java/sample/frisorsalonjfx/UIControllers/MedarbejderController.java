@@ -28,7 +28,7 @@ public class MedarbejderController {
     @FXML
     private Button btnDelete;
     @FXML
-    private Button btnGoBack;
+    private Button backButton;
     @FXML
     private CheckBox cbAdmin;
 
@@ -94,10 +94,10 @@ public class MedarbejderController {
     }
 
     @FXML
-    public void goToMenu() throws IOException {
+    public void goBack() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage = (Stage) btnGoBack.getScene().getWindow();
+        Stage stage = (Stage) backButton.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

@@ -1,13 +1,18 @@
 package sample.frisorsalonjfx.UIControllers;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import sample.frisorsalonjfx.IBestillinger;
 import sample.frisorsalonjfx.Model.Klippetype;
 import sample.frisorsalonjfx.Model.Kunde;
 import sample.frisorsalonjfx.Model.Medarbejder;
 
+import java.io.IOException;
 import java.time.*;
 import java.util.List;
 
@@ -35,6 +40,9 @@ public class BestillingController {
 
     @FXML
     private Label medarbejderHarTravlt;
+
+    @FXML
+    private Button backButton;
 
     public BestillingController() {}
     public void setIBestillinger(IBestillinger bestilling) {
@@ -67,5 +75,12 @@ public class BestillingController {
         }
     }
 
-    public void goBack() {}
+    @FXML
+    public void goBack() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør bestillinger.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

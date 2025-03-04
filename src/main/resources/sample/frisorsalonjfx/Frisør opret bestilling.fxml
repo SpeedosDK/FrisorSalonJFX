@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.BestillingController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.BestillingController">
    <children>
       <Label alignment="CENTER" layoutX="160.0" layoutY="23.0" prefHeight="48.0" prefWidth="281.0" text="Opret bestilling">
          <font>
@@ -30,6 +30,6 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button layoutX="43.0" layoutY="37.0" mnemonicParsing="false" text="Gå tilbage" />
+      <Button fx:id="backButton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" onAction="#goBack" text="Gå tilbage" />
    </children>
 </Pane>

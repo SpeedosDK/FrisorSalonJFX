@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.KlippetypeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.KlippetypeController">
    <children>
       <Label layoutX="179.0" layoutY="32.0" text="Opret ny klippetype" textFill="WHITE">
          <font>
@@ -26,6 +26,6 @@
         </columns>
       </TableView>
       <Button fx:id="btnOpret" layoutX="72.0" layoutY="277.0" mnemonicParsing="false" onAction="#opretKlippeType" prefHeight="31.0" prefWidth="114.0" style="-fx-background-color: mintcream;" text="Opret klippetype" />
-      <Button layoutX="54.0" layoutY="42.0" mnemonicParsing="false" text="Gå tilbage" />
+      <Button fx:id="backButton" layoutX="54.0" layoutY="42.0" mnemonicParsing="false" onAction="#goBack" text="Gå tilbage" />
    </children>
 </Pane>

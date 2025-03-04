@@ -30,6 +30,7 @@ public class MenuController {
     public void setMedarbejderLogic(MedarbejderLogic medarbejderLogic) {
         this.medarbejderLogic = medarbejderLogic;
     }
+
     @FXML
     public void changeToBestillinger() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør bestillinger.fxml"));

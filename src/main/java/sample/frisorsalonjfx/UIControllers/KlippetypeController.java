@@ -3,12 +3,18 @@ package sample.frisorsalonjfx.UIControllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import sample.frisorsalonjfx.Database.KlippetypeRepo;
 import sample.frisorsalonjfx.IKlippeType;
 import sample.frisorsalonjfx.UseCases.KlippeTypeLogic;
 import sample.frisorsalonjfx.Model.Klippetype;
+
+import java.io.IOException;
 
 public class KlippetypeController {
 
@@ -29,6 +35,9 @@ public class KlippetypeController {
 
     @FXML
     private Button btnOpret;
+
+    @FXML
+    private Button backButton;
 
     private ObservableList<Klippetype> listKlippetype = FXCollections.observableArrayList();
     private IKlippeType klippeType;
@@ -62,6 +71,16 @@ public class KlippetypeController {
         listKlippetype.addAll(klippeType.getKlippeTyper());
         tvKlippetype.setItems(listKlippetype);
 
+    }
+
+    @FXML
+    public void goBack() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
+        Parent root = fxmlLoader.load();
+        Stage stage = (Stage) backButton.getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

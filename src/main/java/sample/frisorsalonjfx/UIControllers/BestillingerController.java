@@ -138,7 +138,7 @@ public class BestillingerController {
 
     @FXML
     public void backToMenu() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør hoved menu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
         Stage stage = (Stage) backtoMenuButton.getScene().getWindow();
         stage.setScene(new Scene(root));
