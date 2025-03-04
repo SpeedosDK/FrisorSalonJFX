@@ -76,8 +76,8 @@ public class BestillingLogic implements IBestillinger {
         return b;
     }
 
-    public ObservableList<Bestilling> findBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate) {
-        return bestillingRepo.searchBestilling(searchedName, searchedMedarbejder, searchedDate);
+    public ObservableList<Bestilling> findBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate, Klippetype klippetype) {
+        return bestillingRepo.searchBestilling(searchedName, searchedMedarbejder, searchedDate, klippetype);
     }
 
     @Override

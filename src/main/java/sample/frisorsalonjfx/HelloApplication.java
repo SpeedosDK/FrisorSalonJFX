@@ -25,8 +25,8 @@ public class HelloApplication extends Application {
         loginController.setAuthService(new LoginLogic(new MedarbejderRepo(), new MedarbejderLogic(new MedarbejderRepo())));
 
 
-        Scene scene = new Scene(root, 320, 240);
-        stage.setTitle("Hello!");
+        Scene scene = new Scene(root, 500, 400);
+        stage.setTitle("Monikas frisørsalon");
         stage.setScene(scene);
         stage.show();
     }

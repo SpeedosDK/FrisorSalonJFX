@@ -43,6 +43,7 @@ public class MedarbejderController {
 
 
     public MedarbejderController() {
+        this.iMedarbejder = new MedarbejderLogic(new MedarbejderRepo());
     }
 
     public void setiMedarbejder(IMedarbejder iMedarbejder) {

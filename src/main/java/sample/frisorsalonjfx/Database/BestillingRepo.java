@@ -144,14 +144,16 @@ public class BestillingRepo  implements IBestillingRepository{
     }
 
     @Override
-    public ObservableList<Bestilling> searchBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate) {
+    public ObservableList<Bestilling> searchBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate, Klippetype klippetype) {
         ObservableList<Bestilling> foundBestillinger = FXCollections.observableArrayList();
         String sql = "SELECT * FROM bestillinger "
                 + "JOIN kunder k ON bestillinger.kunde_id = k.kunde_id "
+                + "JOIN klippetype kt ON bestillinger.klippetype_id = kt.klippetype_id "
                 + "JOIN medarbejder m ON bestillinger.medarbejder_id = m.medarbejder_id "
                 + "WHERE (bestillinger.bestilling_dato = ?) "
                 + "OR k.name LIKE ? "
-                + "OR m.medarbejder_name LIKE ?";
+                + "OR m.name LIKE ?"
+                + "OR kt.klipning LIKE ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -159,9 +161,10 @@ public class BestillingRepo  implements IBestillingRepository{
             preparedStatement.setTimestamp(1, Timestamp.valueOf(searchedDate));
             preparedStatement.setString(2, "%" + searchedName + "%");
             preparedStatement.setString(3, "%" + searchedMedarbejder + "%");
+            preparedStatement.setString(4, "%" + klippetype.getKlippeStil() + "%");
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                while (resultSet.next()) {
                     int id = resultSet.getInt("bestilling_id");
                     LocalDateTime dato = resultSet.getTimestamp("bestilling_dato").toLocalDateTime();
                     LocalTime tid = resultSet.getTime("bestilling_tid").toLocalTime();
@@ -175,7 +178,7 @@ public class BestillingRepo  implements IBestillingRepository{
                     );
 
                     // Opret klippetype-objekt
-                    Klippetype klippetype = new Klippetype(
+                    Klippetype newKlippetype = new Klippetype(
                             resultSet.getInt("klippeType_id"),
                             resultSet.getString("klipning"),
                             resultSet.getInt("klippe_length"),
@@ -185,11 +188,11 @@ public class BestillingRepo  implements IBestillingRepository{
                     // Opret medarbejder-objekt
                     Medarbejder medarbejder = new Medarbejder(
                             resultSet.getInt("medarbejder_id"),
-                            resultSet.getString("medarbejder_navn"),
+                            resultSet.getString("name"),
                             null, // password ligemeget
                             resultSet.getBoolean("admin")
                     );
-                    foundBestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, klippetype));
+                    foundBestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, newKlippetype));
                 }
             }
         } catch (SQLException e) {

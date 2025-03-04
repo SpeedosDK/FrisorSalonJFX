@@ -27,9 +27,9 @@ public class MedarbejderLogic implements IMedarbejder {
         System.out.println(currentUser.isAdmin());
         return currentUser != null && currentUser.isAdmin();
     }
+
     @Override
     public Medarbejder addMedarbejder(String name, String password, boolean admin) throws SecurityException {
-
         if (!isAdmin(currentUser)) {
             throw new SecurityException("Du skal være admin for at lave ny medarbejder");
         }

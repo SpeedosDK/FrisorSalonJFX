@@ -59,6 +59,8 @@ public class BestillingerController {
     private ObservableList<Bestilling> bestillingList = FXCollections.observableArrayList();
     @FXML
     private IBestillinger iBestillinger;
+    @FXML
+    private ComboBox<Klippetype> cbKlippetype;
 
     public BestillingerController() {
         this.iBestillinger = new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo());
@@ -84,6 +86,7 @@ public class BestillingerController {
                 new SimpleStringProperty(cellData.getValue().getMedarbejder().getName()));
         colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getTimeForCut())));
         initData();
+        setCbKlippetype();
     }
 
     public void initData() {
@@ -91,8 +94,6 @@ public class BestillingerController {
             bestillingList.addAll(iBestillinger.getBestillinger());
             bestillingTableView.setItems(bestillingList);
         }
-
-
     }
 
 
@@ -126,14 +127,32 @@ public class BestillingerController {
         }
     }
 
+    @FXML
+    public void setCbKlippetype() {
+        ObservableList<Klippetype> klippetype = (ObservableList<Klippetype>) iBestillinger.getKlippetype();
+        cbKlippetype.setItems(klippetype);
+    }
 
     @FXML
     public void findBestilling() {
         String searchedName = navnTextField.getText();
-        String searchedMedarbejder = cbMedarbejder.getSelectionModel().getSelectedItem().toString();
-        LocalDateTime searchedDate = datePicker.getValue().atStartOfDay();
+        Medarbejder searchedMedarbejder = cbMedarbejder.getSelectionModel().getSelectedItem();
+        Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
+        LocalDateTime searchedDate = datePicker.getValue() != null ? datePicker.getValue().atStartOfDay() : LocalDateTime.now();
+
+        if (searchedName == null) {
+            searchedName = "";
+        }
+        if (searchedMedarbejder == null) {
+            searchedMedarbejder = new Medarbejder(1, null, null, false);
+        }
+        if (klippetype == null) {
+            klippetype = new Klippetype(1, null, 0, 0);
+        }
+
         bestillingList.clear();
-        bestillingList.addAll(iBestillinger.findBestilling(searchedName, searchedMedarbejder, searchedDate));
+        bestillingList.addAll(iBestillinger.findBestilling(searchedName, searchedMedarbejder.getName(), searchedDate, klippetype));
+        bestillingTableView.setItems(bestillingList);
     }
 
     @FXML

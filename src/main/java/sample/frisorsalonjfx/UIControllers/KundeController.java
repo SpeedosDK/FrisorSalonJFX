@@ -39,9 +39,11 @@ public class KundeController {
     private ObservableList<Kunde> kundeListe = FXCollections.observableArrayList();
     @FXML
     private Button btnOpretKunde;
+    @FXML
+    private Button sletKunde;
 
     @FXML
-    private Button backToMenuButton;
+    private Button backButton;
 
 
 
@@ -92,10 +94,10 @@ public class KundeController {
     }
 
     @FXML
-    public void backToMenu() throws IOException {
+    public void goBack() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
-        Stage stage = (Stage) backToMenuButton.getScene().getWindow();
+        Stage stage = (Stage) backButton.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }

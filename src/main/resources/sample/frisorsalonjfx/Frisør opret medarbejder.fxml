@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.MedarbejderController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.MedarbejderController">
    <children>
       <TableView fx:id="tblMedarbejder" layoutX="354.0" layoutY="31.0" prefHeight="354.0" prefWidth="233.0" style="-fx-background-color: mintcream;">
         <columns>
@@ -26,6 +26,6 @@
       <Button fx:id="btnDelete" layoutX="155.0" layoutY="285.0" mnemonicParsing="false" onAction="#deleteMedarbejder" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: mintcream;" text="Slet" />
       <Button fx:id="btnAdd" layoutX="155.0" layoutY="251.0" mnemonicParsing="false" onAction="#addMedarbejder" prefHeight="25.0" prefWidth="54.0" style="-fx-background-color: mintcream;" text="Tilføj" />
       <CheckBox fx:id="cbAdmin" layoutX="154.0" layoutY="219.0" mnemonicParsing="false" text="Admin" />
-      <Button fx:id="btnGoBack" layoutX="42.0" layoutY="19.0" mnemonicParsing="false" onAction="#goToMenu" text="Gå tilbage" />
+      <Button fx:id="backButton" layoutX="42.0" layoutY="19.0" mnemonicParsing="false" onAction="#goBack" text="Gå tilbage" />
    </children>
 </Pane>
