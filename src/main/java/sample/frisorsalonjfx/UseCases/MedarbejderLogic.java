@@ -5,11 +5,12 @@ import sample.frisorsalonjfx.Database.IMedarbejderRepository;
 import sample.frisorsalonjfx.IAuthService;
 import sample.frisorsalonjfx.IMedarbejder;
 import sample.frisorsalonjfx.Model.Medarbejder;
+import sample.frisorsalonjfx.UserHolder;
 
 public class MedarbejderLogic implements IMedarbejder {
 
     private final IMedarbejderRepository medarbejderRepo;
-    Medarbejder currentUser;
+    Medarbejder currentUser = UserHolder.getInstance().getCurrentUser();
 
 
     public MedarbejderLogic(IMedarbejderRepository medarbejderRepo) {

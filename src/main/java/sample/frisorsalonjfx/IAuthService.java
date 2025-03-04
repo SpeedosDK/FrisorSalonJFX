@@ -6,4 +6,5 @@ import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
 public interface IAuthService {
     Medarbejder login(String username, String password);
     MedarbejderLogic getMedarbejderLogic();
+    Medarbejder getCurrentUser();
 }

@@ -12,6 +12,7 @@ import sample.frisorsalonjfx.LoginException;
 import sample.frisorsalonjfx.Model.Medarbejder;
 import sample.frisorsalonjfx.UseCases.LoginLogic;
 import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
+import sample.frisorsalonjfx.UserHolder;
 
 import java.io.IOException;
 
@@ -81,6 +82,12 @@ public class LoginController {
 
     @FXML
     public void changeToMenu() throws IOException {
+        MedarbejderLogic medarbejderLogic = authService.getMedarbejderLogic();
+        Medarbejder currentUser = authService.getMedarbejderLogic().getCurrentUser();
+
+        UserHolder.getInstance().setCurrentUser(currentUser);
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
 

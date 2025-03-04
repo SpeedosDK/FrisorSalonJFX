@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import sample.frisorsalonjfx.Database.KundeRepo;
 import sample.frisorsalonjfx.Database.MedarbejderRepo;
+import sample.frisorsalonjfx.LogicHolder;
 import sample.frisorsalonjfx.UseCases.KundeLogic;
 import sample.frisorsalonjfx.UseCases.MedarbejderLogic;
 
@@ -27,10 +28,15 @@ public class MenuController {
     private Button btnMedarbejder;
 
 
-    public void setMedarbejderLogic(MedarbejderLogic medarbejderLogic) {
-        this.medarbejderLogic = medarbejderLogic;
+    @FXML
+    public void initialize() {
+        MedarbejderLogic medarbejderLogic = new MedarbejderLogic(new MedarbejderRepo());
+        setMedarbejderLogic(medarbejderLogic);
     }
 
+    public void setMedarbejderLogic(MedarbejderLogic medarbejderLogic) {
+        LogicHolder.getInstance().setMedarbejderLogic(medarbejderLogic);
+    }
     @FXML
     public void changeToBestillinger() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør bestillinger.fxml"));
@@ -76,7 +82,7 @@ public class MenuController {
         Parent root = fxmlLoader.load();
 
         MedarbejderController medarbejderController = fxmlLoader.getController();
-        medarbejderController.setiMedarbejder(this.medarbejderLogic);
+        medarbejderController.setiMedarbejder(LogicHolder.getInstance().getMedarbejderLogic());
         Stage stage = (Stage) btnMedarbejder.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

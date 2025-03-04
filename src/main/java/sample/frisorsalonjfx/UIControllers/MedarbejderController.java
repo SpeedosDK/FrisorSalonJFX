@@ -48,12 +48,13 @@ public class MedarbejderController {
 
     public void setiMedarbejder(IMedarbejder iMedarbejder) {
         this.iMedarbejder = iMedarbejder;
-        initializeData();
+
     }
 
     @FXML
     public void initialize() {
         tcName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        initializeData();
     }
 
     private void initializeData() {
@@ -98,6 +99,8 @@ public class MedarbejderController {
     public void goBack() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør hoved menu.fxml"));
         Parent root = fxmlLoader.load();
+
+
         Stage stage = (Stage) backButton.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);

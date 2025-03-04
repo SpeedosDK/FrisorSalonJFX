@@ -44,6 +44,11 @@ public class LoginLogic implements IAuthService {
         return medarbejderLogic;
     }
 
+    @Override
+    public Medarbejder getCurrentUser() {
+        return medarbejderLogic.getCurrentUser();
+    }
+
 
 
 
