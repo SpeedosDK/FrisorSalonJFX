@@ -132,10 +132,8 @@ public class BestillingerController {
         String searchedName = navnTextField.getText();
         String searchedMedarbejder = cbMedarbejder.getSelectionModel().getSelectedItem().toString();
         LocalDateTime searchedDate = datePicker.getValue().atStartOfDay();
-
         bestillingList.clear();
         bestillingList.addAll(iBestillinger.findBestilling(searchedName, searchedMedarbejder, searchedDate));
-
     }
 
     @FXML
