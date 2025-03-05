@@ -23,4 +23,6 @@ public interface IBestillinger {
     List<Kunde> getKunde();
     List<Klippetype> getKlippetype();
     List<LocalTime> getTimeAvailable();
+    void sletGamleBestillinger();
+
 }

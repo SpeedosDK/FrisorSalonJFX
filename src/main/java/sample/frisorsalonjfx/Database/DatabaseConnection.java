@@ -13,8 +13,8 @@ public class DatabaseConnection {
     public static Connection getConnection()
     {
         Properties prop = new Properties();
-        try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ladin\\Desktop\\db.properties.txt"))
-        //try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ianx3\\Documents\\dbcon.txt"))
+      //  try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ladin\\Desktop\\db.properties.txt"))
+        try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ianx3\\Documents\\dbcon.txt"))
         {
             prop.load(inputStream);
         } catch (IOException e)

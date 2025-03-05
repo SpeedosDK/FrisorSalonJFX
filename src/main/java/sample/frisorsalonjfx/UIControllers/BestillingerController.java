@@ -89,8 +89,12 @@ public class BestillingerController {
         if (iBestillinger != null) {
             bestillingList.addAll(iBestillinger.getBestillinger());
             bestillingTableView.setItems(bestillingList);
+            iBestillinger.sletGamleBestillinger();
         }
+
     }
+
+
 
 
     @FXML

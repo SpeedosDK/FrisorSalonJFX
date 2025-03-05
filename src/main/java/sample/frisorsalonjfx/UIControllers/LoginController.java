@@ -39,11 +39,8 @@ public class LoginController {
         this.authService = authService;
     }
 
-
-
     @FXML
     public void onLoginButtonClick() {
-
 
         String username = usernameField.getText();
         String password = passwordField.getText();
@@ -52,8 +49,6 @@ public class LoginController {
             wrongLoginLabel.setText("Ugyldigt input. Prøv igen");
             return;
         }
-
-
 
         Medarbejder medarbejder;
         try {

@@ -45,6 +45,7 @@ public class BestillingController {
     private Button backButton;
 
     public BestillingController() {}
+
     public void setIBestillinger(IBestillinger bestilling) {
         this.bestilling = bestilling;
         initData();

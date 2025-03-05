@@ -19,11 +19,8 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Frisør login.fxml"));
         Parent root = fxmlLoader.load();
 
-
-
         LoginController loginController = fxmlLoader.getController();
         loginController.setAuthService(new LoginLogic(new MedarbejderRepo(), new MedarbejderLogic(new MedarbejderRepo())));
-
 
         Scene scene = new Scene(root, 500, 400);
         stage.setTitle("Monikas frisørsalon");

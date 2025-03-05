@@ -61,7 +61,23 @@ public class BestillingLogic implements IBestillinger {
         return false;
     }
 
-    @Override
+    @Override // Denne metode tjekker om en bestilling er over 5 år gammel hver gang man åbner listen med bestillinger
+    // (hvilket man kan regne med bliver gjort dagligt) og sletter de bestillinger der er for gamle
+    // Aner seriøst ikke hvor den her metode burde være men føler ikke at det er her. Nu er den her tho ¯\_(ツ)_/¯
+    public void sletGamleBestillinger() {
+        List<Bestilling> bestillinger = bestillingRepo.readBestillinger();
+
+        LocalDateTime nuTid = LocalDateTime.now();
+        LocalDateTime fiveYearsAgo = nuTid.minusYears(5);
+
+        for (Bestilling bestilling : bestillinger) {
+            if (nuTid.isAfter(bestilling.getBestilling_dato())) {
+                bestillingRepo.deleteBestilling(bestilling);
+            }
+        }
+    }
+
+    @Override // tjekker om medarbejderen har en bestilling på det tidspunkt
     public boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time) {
         return bestillingRepo.isMedarbejderAvailable(medarbejder.getId(), date, time);
     }
@@ -97,7 +113,7 @@ public class BestillingLogic implements IBestillinger {
         return klippeTypeRepo.readKlippeTyper();
     }
     @Override
-    public ObservableList<LocalTime> getTimeAvailable() {
+    public ObservableList<LocalTime> getTimeAvailable() { // tilføjer tider så alle halve timer er en mulighed
         ObservableList<LocalTime> timeOptions = FXCollections.observableArrayList();
         for (int hour = 9; hour < 17; hour++) {
             timeOptions.add(LocalTime.of(hour, 0));
