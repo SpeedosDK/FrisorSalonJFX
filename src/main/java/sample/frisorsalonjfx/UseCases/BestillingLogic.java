@@ -1,5 +1,6 @@
 package sample.frisorsalonjfx.UseCases;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sample.frisorsalonjfx.*;
 import sample.frisorsalonjfx.Database.IBestillingRepository;
@@ -28,6 +29,27 @@ public class BestillingLogic implements IBestillinger {
         this.kundeRepo = kundeRepo;
         this.klippeTypeRepo = klippeTypeRepo;
     }
+//    @Override
+//    public void nyBestilling(int id, Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype) {
+//        bestillingRepo.createBestilling(new Bestilling(id, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype));
+//    }
+//
+//    @Override
+//    public boolean opretBestilling(Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype) {
+//        List<Bestilling> bestillinger = bestillingRepo.readBestillinger();
+//        for (Bestilling b : bestillinger) {
+//            if (bestilling_dato == b.getBestilling_dato() && medarbejder == b.getMedarbejder()) {
+//                if (b.getBestilling_time() == bestilling_time) {
+//                    return true;
+//                }
+//            } else {
+//                nyBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype);
+//                return false;
+//            }
+//        }
+//        return false;
+//    }
+
 
     @Override
     public boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype) {
@@ -54,8 +76,8 @@ public class BestillingLogic implements IBestillinger {
     }
 
     @Override
-    public void deleteBestilling(Bestilling bestilling) {
-        bestillingRepo.deleteBestilling(bestilling);
+    public void deleteBestilling(Bestilling b) {
+        bestillingRepo.deleteBestilling(b);
     }
 
     public ObservableList<Bestilling> findBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate, Klippetype klippetype) {
@@ -75,8 +97,13 @@ public class BestillingLogic implements IBestillinger {
         return klippeTypeRepo.readKlippeTyper();
     }
     @Override
-    public List<LocalTime> getTimeAvailable() {
-        return List.of(LocalTime.of(9, 0), LocalTime.of(10, 0), LocalTime.of(11, 0));
+    public ObservableList<LocalTime> getTimeAvailable() {
+        ObservableList<LocalTime> timeOptions = FXCollections.observableArrayList();
+        for (int hour = 9; hour < 17; hour++) {
+            timeOptions.add(LocalTime.of(hour, 0));
+            timeOptions.add(LocalTime.of(hour, 30));
+        }
+        return timeOptions;
     }
 
 }
