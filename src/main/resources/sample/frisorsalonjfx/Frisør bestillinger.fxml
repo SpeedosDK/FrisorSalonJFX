@@ -17,15 +17,15 @@
             <Font name="Californian FB Italic" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="bestillingTableView" layoutX="159.0" layoutY="108.0" prefHeight="269.0" prefWidth="489.0" style="-fx-background-color: mintcream;">
+      <TableView fx:id="bestillingTableView" layoutX="172.0" layoutY="108.0" prefHeight="269.0" prefWidth="470.0" style="-fx-background-color: mintcream;">
         <columns>
           <TableColumn fx:id="colId" prefWidth="32.0" style="-fx-background-color: mintcream;" text="ID" />
           <TableColumn fx:id="colKunde" minWidth="0.0" prefWidth="71.0" style="-fx-background-color: mintcream;" text="Navn" />
-            <TableColumn fx:id="colKlippetype" prefWidth="64.0" style="-fx-background-color: mintcream;" text="Klippetype" />
-            <TableColumn fx:id="colDato" prefWidth="81.0" style="-fx-background-color: mintcream;" text="Dato" />
-            <TableColumn fx:id="colTid" prefWidth="94.0" style="-fx-background-color: mintcream;" text="Tid" />
-            <TableColumn fx:id="colPris" prefWidth="51.0" style="-fx-background-color: mintcream;" text="Pris" />
-            <TableColumn fx:id="colMedarbejder" prefWidth="121.0" style="-fx-background-color: mintcream;" text="Medarbejder" />
+            <TableColumn fx:id="colKlippetype" prefWidth="75.0" style="-fx-background-color: mintcream;" text="Klippetype" />
+            <TableColumn fx:id="colDato" prefWidth="77.0" style="-fx-background-color: mintcream;" text="Dato" />
+            <TableColumn fx:id="colTid" prefWidth="60.0" style="-fx-background-color: mintcream;" text="Tid" />
+            <TableColumn fx:id="colPris" prefWidth="56.0" style="-fx-background-color: mintcream;" text="Pris" />
+            <TableColumn fx:id="colMedarbejder" prefWidth="98.0" style="-fx-background-color: mintcream;" text="Medarbejder" />
         </columns>
       </TableView>
       <Button fx:id="btnSletBestilling" layoutX="10.0" layoutY="169.0" mnemonicParsing="false" onAction="#sletBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Slet bestilling" />

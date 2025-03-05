@@ -59,7 +59,6 @@ public class RedigerBestillingController {
 
     public void setIBestillinger(IBestillinger bestilling) {
         this.bestilling = bestilling;
-        initData();
     }
 
     public RedigerBestillingController() {
@@ -68,6 +67,7 @@ public class RedigerBestillingController {
 
     public void setValgtBestilling(Bestilling valgtBestilling) {
         this.valgtBestilling = valgtBestilling;
+        initData();
     }
 
     @FXML
@@ -81,6 +81,15 @@ public class RedigerBestillingController {
         List<LocalTime> tider = bestilling.getTimeAvailable();
         cbTid.getItems().addAll(tider);
         bestillingRedigeretText.setVisible(false);
+
+        if (valgtBestilling != null) {
+            kundeChoiceBox.setValue(valgtBestilling.getKunde());
+            cbTid.setValue(valgtBestilling.getBestilling_time());
+            cbMedarbejder.setValue(valgtBestilling.getMedarbejder());
+            datePicker.setValue(valgtBestilling.getBestilling_dato().toLocalDate());
+            cbKlippetype.setValue(valgtBestilling.getKlippetype());
+        }
+
     }
 
 
