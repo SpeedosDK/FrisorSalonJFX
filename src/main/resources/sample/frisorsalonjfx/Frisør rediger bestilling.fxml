@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.RedigerBestillingController">
+   <children>
+      <Label alignment="CENTER" layoutX="160.0" layoutY="23.0" prefHeight="48.0" prefWidth="281.0" text="Rediger bestilling">
+         <font>
+            <Font name="Californian FB Italic" size="43.0" />
+         </font>
+      </Label>
+      <DatePicker fx:id="datePicker" layoutX="365.0" layoutY="232.0" style="-fx-background-color: mintcream;" />
+      <ChoiceBox fx:id="cbKlippetype" layoutX="56.0" layoutY="317.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <ChoiceBox fx:id="kundeChoiceBox" layoutX="57.0" layoutY="144.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <Label layoutX="127.0" layoutY="118.0" text="Kunde" />
+      <Label layoutX="114.0" layoutY="283.0" text="Klippetype" />
+      <Label layoutX="441.0" layoutY="200.0" text="Dato" />
+      <ChoiceBox fx:id="cbTid" layoutX="366.0" layoutY="144.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <Label layoutX="445.0" layoutY="118.0" text="Tid" />
+      <ChoiceBox fx:id="cbMedarbejder" layoutX="57.0" layoutY="231.0" prefHeight="27.0" prefWidth="178.0" style="-fx-background-color: mintcream;" />
+      <Label layoutX="108.0" layoutY="200.0" text="Medarbejder" />
+      <Button fx:id="setBestillingButton" layoutX="406.0" layoutY="318.0" mnemonicParsing="false" onAction="#redigerBestilling" text="Sæt bestilling" />
+      <Label fx:id="medarbejderHarTravlt" layoutX="374.0" layoutY="279.0" text="Medarbejder har travlt" textFill="RED" visible="false">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Button fx:id="backButton" layoutX="43.0" layoutY="37.0" mnemonicParsing="false" onAction="#goBack" text="Gå tilbage" />
+      <Label fx:id="bestillingRedigeretText" alignment="CENTER" layoutX="129.0" layoutY="343.0" prefHeight="53.0" prefWidth="342.0" text="Bestilling redigeret!" visible="false">
+         <font>
+            <Font name="Californian FB Italic" size="43.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

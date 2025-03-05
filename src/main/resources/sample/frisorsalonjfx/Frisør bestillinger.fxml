@@ -12,20 +12,20 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="649.0" style="-fx-background-color: dimgrey;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.frisorsalonjfx.UIControllers.BestillingerController">
    <children>
-      <Label alignment="TOP_CENTER" layoutX="180.0" layoutY="22.0" prefHeight="76.0" prefWidth="240.0" text="Bestillinger" textFill="WHITE">
+      <Label alignment="TOP_CENTER" layoutX="205.0" layoutY="22.0" prefHeight="76.0" prefWidth="240.0" text="Bestillinger" textFill="WHITE">
          <font>
             <Font name="Californian FB Italic" size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="bestillingTableView" layoutX="217.0" layoutY="107.0" prefHeight="269.0" prefWidth="430.0" style="-fx-background-color: mintcream;">
+      <TableView fx:id="bestillingTableView" layoutX="159.0" layoutY="108.0" prefHeight="269.0" prefWidth="489.0" style="-fx-background-color: mintcream;">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="45.99993896484375" style="-fx-background-color: mintcream;" text="ID" />
-          <TableColumn fx:id="colKunde" minWidth="0.0" prefWidth="65.99998474121094" style="-fx-background-color: mintcream;" text="Navn" />
-            <TableColumn fx:id="colKlippetype" prefWidth="83.99993896484375" style="-fx-background-color: mintcream;" text="Klippetype" />
-            <TableColumn fx:id="colDato" prefWidth="76.0" style="-fx-background-color: mintcream;" text="Dato" />
-            <TableColumn fx:id="colTid" prefWidth="93.99996948242188" style="-fx-background-color: mintcream;" text="Tid" />
-            <TableColumn fx:id="colPris" prefWidth="64.0" style="-fx-background-color: mintcream;" text="Pris" />
-            <TableColumn fx:id="colMedarbejder" prefWidth="83.66668701171875" style="-fx-background-color: mintcream;" text="Medarbejder" />
+          <TableColumn fx:id="colId" prefWidth="32.0" style="-fx-background-color: mintcream;" text="ID" />
+          <TableColumn fx:id="colKunde" minWidth="0.0" prefWidth="71.0" style="-fx-background-color: mintcream;" text="Navn" />
+            <TableColumn fx:id="colKlippetype" prefWidth="64.0" style="-fx-background-color: mintcream;" text="Klippetype" />
+            <TableColumn fx:id="colDato" prefWidth="81.0" style="-fx-background-color: mintcream;" text="Dato" />
+            <TableColumn fx:id="colTid" prefWidth="94.0" style="-fx-background-color: mintcream;" text="Tid" />
+            <TableColumn fx:id="colPris" prefWidth="51.0" style="-fx-background-color: mintcream;" text="Pris" />
+            <TableColumn fx:id="colMedarbejder" prefWidth="121.0" style="-fx-background-color: mintcream;" text="Medarbejder" />
         </columns>
       </TableView>
       <Button fx:id="btnSletBestilling" layoutX="10.0" layoutY="169.0" mnemonicParsing="false" onAction="#sletBestilling" prefHeight="31.0" prefWidth="116.0" style="-fx-background-color: mintcream;" text="Slet bestilling" />

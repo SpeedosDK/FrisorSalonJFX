@@ -64,12 +64,8 @@ public class BestillingerController {
 
     public BestillingerController() {
         this.iBestillinger = new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo());
-        //initData();
     }
-//    public void setiBestillinger(IBestillinger iBestillinger) {
-//        this.iBestillinger = iBestillinger;
-//        initData();
-//    }
+
     @FXML
     public void initialize() {
         // Kobl kolonner til Bestilling-objektets felter
@@ -111,8 +107,14 @@ public class BestillingerController {
 
     @FXML
     public void changeToRedigerBestilling() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Frisør rediger bestilling.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/sample/frisorsalonjfx/Frisør rediger bestilling.fxml"));
         Parent root = fxmlLoader.load();
+
+        RedigerBestillingController redigerBestillingController = fxmlLoader.getController();
+        redigerBestillingController.setIBestillinger(iBestillinger);
+        Bestilling valgtBestilling = bestillingTableView.getSelectionModel().getSelectedItem();
+        redigerBestillingController.setValgtBestilling(valgtBestilling);
+
         Stage stage = (Stage) btnRedigerBestilling.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();

@@ -12,6 +12,7 @@ public interface IBestillingRepository {
     void createBestilling(Bestilling bestilling);
     ObservableList<Bestilling> readBestillinger();
     List<Bestilling> readBestillingerByMedarbejder(int medarbejderId);
+    void updateBestilling(Bestilling bestilling);
     void deleteBestilling(Bestilling bestilling);
     ObservableList<Bestilling> searchBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate, Klippetype klippetype);
     boolean isMedarbejderAvailable(int medarbejderId, LocalDateTime bestillingDato, LocalTime bestillingTid);

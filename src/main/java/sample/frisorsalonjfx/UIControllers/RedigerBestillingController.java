@@ -4,19 +4,27 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import sample.frisorsalonjfx.Database.BestillingRepo;
+import sample.frisorsalonjfx.Database.KlippetypeRepo;
+import sample.frisorsalonjfx.Database.KundeRepo;
+import sample.frisorsalonjfx.Database.MedarbejderRepo;
 import sample.frisorsalonjfx.IBestillinger;
+import sample.frisorsalonjfx.Model.Bestilling;
 import sample.frisorsalonjfx.Model.Klippetype;
 import sample.frisorsalonjfx.Model.Kunde;
 import sample.frisorsalonjfx.Model.Medarbejder;
+import sample.frisorsalonjfx.UseCases.BestillingLogic;
 
 import java.io.IOException;
-import java.time.*;
+import java.time.LocalTime;
 import java.util.List;
 
-public class BestillingController {
+public class RedigerBestillingController {
 
     private IBestillinger bestilling;
 
@@ -36,21 +44,34 @@ public class BestillingController {
     private ChoiceBox<Klippetype> cbKlippetype;
 
     @FXML
-    private Button btnOpretBestilling;
+    private Button setBestillingButton;
 
     @FXML
-    private Label medarbejderHarTravlt;
+    private Label bestillingRedigeretText;
 
     @FXML
     private Button backButton;
 
-    public BestillingController() {}
+    @FXML
+    private IBestillinger iBestillinger;
+
+    private Bestilling valgtBestilling;
+
     public void setIBestillinger(IBestillinger bestilling) {
         this.bestilling = bestilling;
         initData();
     }
 
-    public void initData() {
+    public RedigerBestillingController() {
+        this.iBestillinger = new BestillingLogic(new BestillingRepo(), new MedarbejderRepo(), new KlippetypeRepo(), new KundeRepo());
+    }
+
+    public void setValgtBestilling(Bestilling valgtBestilling) {
+        this.valgtBestilling = valgtBestilling;
+    }
+
+    @FXML
+    public void initData()  {
         List<Medarbejder> medarbejdere = bestilling.getMedarbejder();
         cbMedarbejder.getItems().addAll(medarbejdere);
         List<Kunde> kunder = bestilling.getKunde();
@@ -59,20 +80,21 @@ public class BestillingController {
         cbKlippetype.getItems().addAll(klippetyper);
         List<LocalTime> tider = bestilling.getTimeAvailable();
         cbTid.getItems().addAll(tider);
+        bestillingRedigeretText.setVisible(false);
     }
 
-    public void nyBestilling() {
-        Medarbejder medarbejder = cbMedarbejder.getSelectionModel().getSelectedItem();
-        LocalDateTime bestilling_dato = datePicker.getValue().atStartOfDay();
-        LocalTime bestilling_time = cbTid.getValue();
-        Kunde kunde = kundeChoiceBox.getSelectionModel().getSelectedItem();
-        Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
 
-        if (bestilling.opretBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype)) {
-            medarbejderHarTravlt.setVisible(false);
-        } else {
-            medarbejderHarTravlt.setVisible(true);
-        }
+    @FXML
+    public void redigerBestilling() {
+        valgtBestilling.setMedarbejder(cbMedarbejder.getValue());
+        valgtBestilling.setBestilling_dato(datePicker.getValue().atStartOfDay());
+        valgtBestilling.setBestilling_time(cbTid.getValue());
+        valgtBestilling.setKunde(kundeChoiceBox.getValue());
+        valgtBestilling.setKlippetype(cbKlippetype.getValue());
+
+        iBestillinger.updateBestilling(valgtBestilling);
+
+        bestillingRedigeretText.setVisible(true);
     }
 
     @FXML
@@ -83,4 +105,11 @@ public class BestillingController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+
+
+
+
+
+
 }

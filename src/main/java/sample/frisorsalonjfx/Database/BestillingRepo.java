@@ -110,6 +110,31 @@ public class BestillingRepo  implements IBestillingRepository{
     }
 
     @Override
+    public void updateBestilling(Bestilling bestilling) {
+        String sql = "UPDATE bestillinger SET bestilling_dato = ?, bestilling_tid = ?, kunde_id = ?, klippeType_id = ?, medarbejder_id = ? WHERE bestilling_id = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             Statement statement = connection.createStatement();
+             PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
+            preparedStatement.setDate(1, Date.valueOf(bestilling.getBestilling_dato().toLocalDate()));
+            preparedStatement.setTime(2, Time.valueOf(bestilling.getBestilling_time()));
+            preparedStatement.setInt(3, bestilling.getKunde().getId());
+            preparedStatement.setInt(4, bestilling.getKlippetype().getId());
+            preparedStatement.setInt(5, bestilling.getMedarbejder().getId());
+            preparedStatement.setInt(6, bestilling.getId());
+
+            // Execute the update
+            int rowsAffected = preparedStatement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Bestilling opdateret.");
+            } else {
+                System.out.println("No bestilling found with the given ID.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public void deleteBestilling(Bestilling bestilling) {
         String sql = "DELETE FROM bestillinger WHERE bestilling_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
