@@ -10,15 +10,17 @@ public class Bestilling {
     private LocalTime bestilling_time;
     private Kunde kunde;
     private Klippetype klippetype;
+    boolean aktiv;
 
 
-    public Bestilling(int id, Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype) {
+    public Bestilling(int id, Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype, boolean aktiv) {
         this.id = id;
         this.medarbejder = medarbejder;
         this.bestilling_dato = bestilling_dato;
         this.bestilling_time = bestilling_time;
         this.kunde = kunde;
         this.klippetype = klippetype;
+        this.aktiv = aktiv;
     }
 
 
@@ -69,6 +71,22 @@ public class Bestilling {
 
     public void setKlippetype(Klippetype klippetype) {
         this.klippetype = klippetype;
+    }
+
+    public void setAktiv(boolean aktiv) {
+        this.aktiv = aktiv;
+    }
+
+    public boolean getAktiv() {
+        return aktiv;
+    }
+
+    public void getAktivString() {
+        if(aktiv) {
+            System.out.println("Aktiv");
+        } else {
+            System.out.println("Ikke aktiv");
+        }
     }
 
 

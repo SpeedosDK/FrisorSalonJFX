@@ -32,6 +32,10 @@ public class BestillingerController {
     @FXML
     private Button btnFindBestilling;
     @FXML
+    private Button btnSkiftAktiv;
+    @FXML
+    private CheckBox checkBoxVisInaktive;
+    @FXML
     private TableView<Bestilling> bestillingTableView;
     @FXML
     private TableColumn<Bestilling, Integer> colId;
@@ -47,6 +51,8 @@ public class BestillingerController {
     private TableColumn<Bestilling, String> colMedarbejder;
     @FXML
     private TableColumn<Bestilling, String> colPris;
+    @FXML
+    private TableColumn<Bestilling, String> colAktiv;
     @FXML
     private Button backtoMenuButton;
     @FXML
@@ -72,8 +78,9 @@ public class BestillingerController {
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colDato.setCellValueFactory(new PropertyValueFactory<>("bestilling_dato"));
         colTid.setCellValueFactory(new PropertyValueFactory<>("bestilling_time"));
+        colAktiv.setCellValueFactory(new PropertyValueFactory<>("aktiv"));
 
-        // Specifik binding til relaterede objekter (Kunde, Klippetype, Medarbejder)
+        // Specifik binding til relaterede objekter (Kunde, Klippetype, Medarbejder, Aktiv)
         colKunde.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getKunde().getName()));
         colKlippetype.setCellValueFactory(cellData ->
@@ -81,20 +88,52 @@ public class BestillingerController {
         colMedarbejder.setCellValueFactory(cellData ->
                 new SimpleStringProperty(cellData.getValue().getMedarbejder().getName()));
         colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getTimeForCut())));
-        initData();
+        colAktiv.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAktiv() ? "Ja" : "Nej"));
         setCbKlippetype();
+        setBestillingTableView();
     }
 
-    public void initData() {
-        if (iBestillinger != null) {
-            bestillingList.addAll(iBestillinger.getBestillinger());
-            bestillingTableView.setItems(bestillingList);
-            iBestillinger.sletGamleBestillinger();
+    @FXML
+    public void setCbKlippetype() {
+        ObservableList<Klippetype> klippetype = (ObservableList<Klippetype>) iBestillinger.getKlippetype();
+        cbKlippetype.setItems(klippetype);
+    }
+    @FXML
+    public void setBestillingTableView() {
+        bestillingList.clear();
+        loadBestillinger(checkBoxVisInaktive.isSelected());
+    }
+
+    @FXML
+    public void skiftAktiv() {
+        Bestilling bestilling = bestillingTableView.getSelectionModel().getSelectedItem();
+        if (bestilling != null) {
+            bestilling.setAktiv(!bestilling.getAktiv());
+            iBestillinger.updateBestilling(bestilling);
+            bestillingTableView.refresh();
         }
-
     }
 
+    @FXML
+    public void loadBestillinger(Boolean visInaktiveBestillinger) {
+        if (iBestillinger != null) {
+            List<Bestilling> bestillinger = iBestillinger.getBestillinger();
 
+            iBestillinger.setGamleBestillingerInaktive(bestillinger); // sætter bestillinger hvis dato har været der som inaktive
+            iBestillinger.sletGamleBestillinger(); // sletter bestillinger der er over 5 år gamle
+
+            if (visInaktiveBestillinger) {
+                bestillingList.addAll(bestillinger);
+            } else {
+                for (Bestilling bestilling : bestillinger) {
+                    if (bestilling.getAktiv()) {
+                        bestillingList.add(bestilling);
+                    }
+                }
+            }
+            bestillingTableView.setItems(bestillingList);
+        }
+    }
 
 
     @FXML
@@ -133,11 +172,9 @@ public class BestillingerController {
         }
     }
 
-    @FXML
-    public void setCbKlippetype() {
-        ObservableList<Klippetype> klippetype = (ObservableList<Klippetype>) iBestillinger.getKlippetype();
-        cbKlippetype.setItems(klippetype);
-    }
+
+
+
 
     @FXML
     public void findBestilling() {

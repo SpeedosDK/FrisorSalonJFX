@@ -68,8 +68,9 @@ public class BestillingController {
         LocalTime bestilling_time = cbTid.getValue();
         Kunde kunde = kundeChoiceBox.getSelectionModel().getSelectedItem();
         Klippetype klippetype = cbKlippetype.getSelectionModel().getSelectedItem();
+        boolean aktiv = true;
 
-        if (bestilling.opretBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype)) {
+        if (bestilling.opretBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype, aktiv)) {
             medarbejderHarTravlt.setVisible(false);
         } else {
             medarbejderHarTravlt.setVisible(true);
