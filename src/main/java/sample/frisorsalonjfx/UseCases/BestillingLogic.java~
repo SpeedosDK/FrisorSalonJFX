@@ -29,40 +29,21 @@ public class BestillingLogic implements IBestillinger {
         this.kundeRepo = kundeRepo;
         this.klippeTypeRepo = klippeTypeRepo;
     }
-//    @Override
-//    public void nyBestilling(int id, Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype) {
-//        bestillingRepo.createBestilling(new Bestilling(id, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype));
-//    }
-//
-//    @Override
-//    public boolean opretBestilling(Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype) {
-//        List<Bestilling> bestillinger = bestillingRepo.readBestillinger();
-//        for (Bestilling b : bestillinger) {
-//            if (bestilling_dato == b.getBestilling_dato() && medarbejder == b.getMedarbejder()) {
-//                if (b.getBestilling_time() == bestilling_time) {
-//                    return true;
-//                }
-//            } else {
-//                nyBestilling(1, medarbejder, bestilling_dato, bestilling_time, kunde, klippetype);
-//                return false;
-//            }
-//        }
-//        return false;
-//    }
-
 
     @Override
-    public boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype) {
+    public boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype, boolean aktiv) {
         if (isMedarbejderAvailable(medarbejder, date, time)) {
-            Bestilling bestilling = new Bestilling(id, medarbejder, date, time, kunde, klippetype);
+            Bestilling bestilling = new Bestilling(id, medarbejder, date, time, kunde, klippetype, aktiv);
             bestillingRepo.createBestilling(bestilling);
             return true;
         }
         return false;
     }
 
-    @Override
-    public void sletGamleBestillinger() { // Aner seriøst ikke hvor den her burde være men føler ikke at det er her. Nu er den her ¯\_(ツ)_/¯
+    @Override // Denne metode tjekker om en bestilling er over 5 år gammel hver gang man åbner listen med bestillinger
+    // (hvilket man kan regne med bliver gjort dagligt) og sletter de bestillinger der er for gamle
+    // Aner seriøst ikke hvor den her metode burde være men føler ikke at det er her. Nu er den her tho ¯\_(ツ)_/¯
+    public void sletGamleBestillinger() {
         List<Bestilling> bestillinger = bestillingRepo.readBestillinger();
 
         LocalDateTime nuTid = LocalDateTime.now();
@@ -76,6 +57,17 @@ public class BestillingLogic implements IBestillinger {
     }
 
     @Override
+    // tjekker om bestillingerne er før idag, og hvis ja, sætter dem som inaktiv.
+    public void setGamleBestillingerInaktive(List<Bestilling> bestillinger) {
+        for (Bestilling bestilling : bestillinger) {
+            if (bestilling.getBestilling_dato().isBefore(LocalDateTime.now().minusDays(1))) {
+                bestilling.setAktiv(false);
+                updateBestilling(bestilling);
+            }
+        }
+    }
+
+    @Override // tjekker om medarbejderen har en bestilling på det tidspunkt
     public boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time) {
         return bestillingRepo.isMedarbejderAvailable(medarbejder.getId(), date, time);
     }
@@ -111,7 +103,7 @@ public class BestillingLogic implements IBestillinger {
         return klippeTypeRepo.readKlippeTyper();
     }
     @Override
-    public ObservableList<LocalTime> getTimeAvailable() {
+    public ObservableList<LocalTime> getTimeAvailable() { // tilføjer tider så alle halve timer er en mulighed
         ObservableList<LocalTime> timeOptions = FXCollections.observableArrayList();
         for (int hour = 9; hour < 17; hour++) {
             timeOptions.add(LocalTime.of(hour, 0));
