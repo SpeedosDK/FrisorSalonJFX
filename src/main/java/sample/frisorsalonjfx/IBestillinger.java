@@ -11,8 +11,8 @@ import java.time.LocalTime;
 import java.util.List;
 
 public interface IBestillinger {
-    //void nyBestilling(int id, Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype);
-//    boolean opretBestilling(Medarbejder medarbejder, LocalDateTime bestilling_dato, LocalTime bestilling_time, Kunde kunde, Klippetype klippetype);
+
+    
     ObservableList<Bestilling> getBestillinger();
     void deleteBestilling(Bestilling bestilling);
     void updateBestilling(Bestilling bestilling);
