@@ -72,7 +72,7 @@ public class RedigerBestillingController {
 
     @FXML
     public void initData()  {
-        List<Medarbejder> medarbejdere = bestilling.getMedarbejder();
+        List<Medarbejder> medarbejdere = bestilling.getMedarbejdere();
         cbMedarbejder.getItems().addAll(medarbejdere);
         List<Kunde> kunder = bestilling.getKunde();
         kundeChoiceBox.getItems().addAll(kunder);

@@ -17,7 +17,7 @@ public class BestillingRepo  implements IBestillingRepository{
 
     @Override
     public void createBestilling(Bestilling bestilling) {
-        String sql = "INSERT INTO bestillinger (bestilling_dato, bestilling_tid, kunde_id, klippeType_id, medarbejder_id) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bestillinger (bestilling_dato, bestilling_tid, kunde_id, klippeType_id, medarbejder_id, aktiv) VALUES (?, ?, ?, ?, ?, ?)";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -27,6 +27,7 @@ public class BestillingRepo  implements IBestillingRepository{
             preparedStatement.setInt(3, bestilling.getKunde().getId());
             preparedStatement.setInt(4, bestilling.getKlippetype().getId());
             preparedStatement.setInt(5, bestilling.getMedarbejder().getId());
+            preparedStatement.setBoolean(6, bestilling.getAktiv());
 
             int rowInserted = preparedStatement.executeUpdate();
             if (rowInserted > 0) {
@@ -39,7 +40,7 @@ public class BestillingRepo  implements IBestillingRepository{
     @Override
     public ObservableList<Bestilling> readBestillinger() {
         ObservableList<Bestilling> bestillinger = FXCollections.observableArrayList();
-        String sql = "SELECT b.bestilling_id, b.bestilling_dato, b.bestilling_tid, " +
+        String sql = "SELECT b.bestilling_id, b.bestilling_dato, b.bestilling_tid, b.aktiv, " +
                 "k.kunde_id, k.name, k.tlfnr, k.email, " +
                 "kl.klippeType_id, kl.klipning, kl.klippe_length, kl.pris, " +
                 "m.medarbejder_id, m.name AS medarbejder_navn, m.admin " +
@@ -55,6 +56,7 @@ public class BestillingRepo  implements IBestillingRepository{
                 int id = resultSet.getInt("bestilling_id");
                 LocalDateTime dato = resultSet.getTimestamp("bestilling_dato").toLocalDateTime();
                 LocalTime tid = resultSet.getTime("bestilling_tid").toLocalTime();
+                boolean aktiv = resultSet.getBoolean("aktiv");
 
                 // Opret kunde-objekt
                 Kunde kunde = new Kunde(
@@ -81,7 +83,7 @@ public class BestillingRepo  implements IBestillingRepository{
                 );
 
                 // Opret Bestilling-objekt og tilføj til listen
-                bestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, klippetype));
+                bestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, klippetype, aktiv));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -111,7 +113,7 @@ public class BestillingRepo  implements IBestillingRepository{
 
     @Override
     public void updateBestilling(Bestilling bestilling) {
-        String sql = "UPDATE bestillinger SET bestilling_dato = ?, bestilling_tid = ?, kunde_id = ?, klippeType_id = ?, medarbejder_id = ? WHERE bestilling_id = ?";
+        String sql = "UPDATE bestillinger SET bestilling_dato = ?, bestilling_tid = ?, kunde_id = ?, klippeType_id = ?, medarbejder_id = ?, aktiv = ? WHERE bestilling_id = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -120,14 +122,15 @@ public class BestillingRepo  implements IBestillingRepository{
             preparedStatement.setInt(3, bestilling.getKunde().getId());
             preparedStatement.setInt(4, bestilling.getKlippetype().getId());
             preparedStatement.setInt(5, bestilling.getMedarbejder().getId());
-            preparedStatement.setInt(6, bestilling.getId());
+            preparedStatement.setBoolean(6, bestilling.getAktiv());
+            preparedStatement.setInt(7, bestilling.getId());
 
             // Execute the update
             int rowsAffected = preparedStatement.executeUpdate();
             if (rowsAffected > 0) {
                 System.out.println("Bestilling opdateret.");
             } else {
-                System.out.println("No bestilling found with the given ID.");
+                System.out.println("Ingen bestilling fundet med det ID.");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,8 +180,8 @@ public class BestillingRepo  implements IBestillingRepository{
                 + "JOIN medarbejder m ON bestillinger.medarbejder_id = m.medarbejder_id "
                 + "WHERE (bestillinger.bestilling_dato = ?) "
                 + "OR k.name LIKE ? "
-                + "OR m.name LIKE ?"
-                + "OR kt.klipning LIKE ?";
+                + "OR m.name LIKE ? "
+                + "OR kt.klipning = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -186,13 +189,14 @@ public class BestillingRepo  implements IBestillingRepository{
             preparedStatement.setTimestamp(1, Timestamp.valueOf(searchedDate));
             preparedStatement.setString(2, "%" + searchedName + "%");
             preparedStatement.setString(3, "%" + searchedMedarbejder + "%");
-            preparedStatement.setString(4, "%" + klippetype.getKlippeStil() + "%");
+            preparedStatement.setString(4, klippetype.getKlippeStil());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     int id = resultSet.getInt("bestilling_id");
                     LocalDateTime dato = resultSet.getTimestamp("bestilling_dato").toLocalDateTime();
                     LocalTime tid = resultSet.getTime("bestilling_tid").toLocalTime();
+                    boolean aktiv = resultSet.getBoolean("aktiv");
 
                     // Opret kunde-objekt
                     Kunde kunde = new Kunde(
@@ -204,7 +208,7 @@ public class BestillingRepo  implements IBestillingRepository{
 
                     // Opret klippetype-objekt
                     Klippetype newKlippetype = new Klippetype(
-                            resultSet.getInt("klippeType_id"),
+                            resultSet.getInt("klippetype_id"),
                             resultSet.getString("klipning"),
                             resultSet.getInt("klippe_length"),
                             resultSet.getInt("pris")
@@ -217,7 +221,7 @@ public class BestillingRepo  implements IBestillingRepository{
                             null, // password ligemeget
                             resultSet.getBoolean("admin")
                     );
-                    foundBestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, newKlippetype));
+                    foundBestillinger.add(new Bestilling(id, medarbejder, dato, tid, kunde, newKlippetype, aktiv));
                 }
             }
         } catch (SQLException e) {

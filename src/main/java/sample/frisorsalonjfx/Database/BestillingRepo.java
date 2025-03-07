@@ -178,10 +178,10 @@ public class BestillingRepo  implements IBestillingRepository{
                 + "JOIN kunder k ON bestillinger.kunde_id = k.kunde_id "
                 + "JOIN klippetype kt ON bestillinger.klippetype_id = kt.klippetype_id "
                 + "JOIN medarbejder m ON bestillinger.medarbejder_id = m.medarbejder_id "
-                + "WHERE (bestillinger.bestilling_dato = ?) "
+                + "WHERE bestillinger.bestilling_dato = ? "
                 + "OR k.name LIKE ? "
-                + "OR m.name LIKE ?"
-                + "OR kt.klipning LIKE ?";
+                + "OR m.name LIKE ? "
+                + "OR kt.klipning = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
@@ -189,7 +189,7 @@ public class BestillingRepo  implements IBestillingRepository{
             preparedStatement.setTimestamp(1, Timestamp.valueOf(searchedDate));
             preparedStatement.setString(2, "%" + searchedName + "%");
             preparedStatement.setString(3, "%" + searchedMedarbejder + "%");
-            preparedStatement.setString(4, "%" + klippetype.getKlippeStil() + "%");
+            preparedStatement.setString(4, klippetype.getKlippeStil());
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
@@ -208,7 +208,7 @@ public class BestillingRepo  implements IBestillingRepository{
 
                     // Opret klippetype-objekt
                     Klippetype newKlippetype = new Klippetype(
-                            resultSet.getInt("klippeType_id"),
+                            resultSet.getInt("klippetype_id"),
                             resultSet.getString("klipning"),
                             resultSet.getInt("klippe_length"),
                             resultSet.getInt("pris")

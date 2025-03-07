@@ -91,7 +91,7 @@ public class BestillingLogic implements IBestillinger {
     }
 
     @Override
-    public List<Medarbejder> getMedarbejder() {
+    public List<Medarbejder> getMedarbejdere() {
         return medarbejderRepo.readMedarbejdere();
     }
     @Override

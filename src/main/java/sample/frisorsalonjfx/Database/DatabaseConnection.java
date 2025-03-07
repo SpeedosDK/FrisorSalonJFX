@@ -14,7 +14,7 @@ public class DatabaseConnection {
     {
         Properties prop = new Properties();
       //  try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ladin\\Desktop\\db.properties.txt"))
-        try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ianx3\\Documents\\dbcon.txt"))
+        try(FileInputStream inputStream = new FileInputStream("C:\\Users\\ianx3\\Documents\\whatever.txt"))
         {
             prop.load(inputStream);
         } catch (IOException e)

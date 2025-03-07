@@ -89,15 +89,18 @@ public class BestillingerController {
                 new SimpleStringProperty(cellData.getValue().getMedarbejder().getName()));
         colPris.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getKlippetype().getTimeForCut())));
         colAktiv.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAktiv() ? "Ja" : "Nej"));
-        setCbKlippetype();
+        setChoiceBoxes();
         setBestillingTableView();
     }
 
     @FXML
-    public void setCbKlippetype() {
+    public void setChoiceBoxes() {
         ObservableList<Klippetype> klippetype = (ObservableList<Klippetype>) iBestillinger.getKlippetype();
         cbKlippetype.setItems(klippetype);
+        ObservableList<Medarbejder> medarbejdere = (ObservableList<Medarbejder>) iBestillinger.getMedarbejdere();
+        cbMedarbejder.setItems(medarbejdere);
     }
+
     @FXML
     public void setBestillingTableView() {
         bestillingList.clear();
@@ -171,10 +174,6 @@ public class BestillingerController {
             bestillingTableView.getItems().remove(slettetBestilling);
         }
     }
-
-
-
-
 
     @FXML
     public void findBestilling() {

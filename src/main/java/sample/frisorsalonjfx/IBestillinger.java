@@ -19,7 +19,7 @@ public interface IBestillinger {
     ObservableList<Bestilling> findBestilling(String searchedName, String searchedMedarbejder, LocalDateTime searchedDate, Klippetype klippetype);
     boolean opretBestilling(int id, Medarbejder medarbejder, LocalDateTime date, LocalTime time, Kunde kunde, Klippetype klippetype, boolean aktiv);
     boolean isMedarbejderAvailable(Medarbejder medarbejder, LocalDateTime date, LocalTime time);
-    List<Medarbejder> getMedarbejder();
+    List<Medarbejder> getMedarbejdere();
     List<Kunde> getKunde();
     List<Klippetype> getKlippetype();
     List<LocalTime> getTimeAvailable();
